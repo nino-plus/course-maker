@@ -3,15 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
-    pathMatch: 'full',
-    loadChildren: () =>
-      import('./shell/shell.module').then((m) => m.ShellModule),
-  },
-  {
     path: 'welcome',
     loadChildren: () =>
       import('./welcome/welcome.module').then((m) => m.WelcomeModule),
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./shell/shell.module').then((m) => m.ShellModule),
   },
   {
     path: '**',
