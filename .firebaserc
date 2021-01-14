@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "course-maker-fb177": {
+      "hosting": {
+        "course-maker": [
+          "course-maker-fb177"
+        ]
+      }
+    }
+  }
+}
