@@ -22,8 +22,7 @@ import { AngularFireFunctionsModule, REGION } from '@angular/fire/functions';
     AngularFireStorageModule,
     AngularFireFunctionsModule,
   ],
-  providers: [
-    { provide: REGION, useValue: 'asia-northeast1' }],
+  providers: [{ provide: REGION, useValue: 'asia-northeast1' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
