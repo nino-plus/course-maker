@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { User } from '../interfaces/user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
 
