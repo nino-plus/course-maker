@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { JudgeQuestionDialogComponent } from '../judge-question-dialog/judge-question-dialog.component';
 
 @Component({
   selector: 'app-question',
@@ -9,12 +11,26 @@ import { FormControl } from '@angular/forms';
 export class QuestionComponent implements OnInit {
   answerCtrl = new FormControl();
 
-  constructor() {}
+  constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {}
 
   openJudgeDialog(): void {
-    alert('fafaffafdsfgdsads');
-    console.log(this.answerCtrl.value);
+    this.dialog
+      .open(JudgeQuestionDialogComponent, {
+        width: '800px',
+        restoreFocus: false,
+        autoFocus: false,
+        data: {
+          selected: this.answerCtrl.value,
+          answer: 'test',
+        },
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          console.log(result);
+        }
+      });
   }
 }
