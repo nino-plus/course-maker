@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { CourseWithUser } from 'src/app/interfaces/course';
+import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-course-card',
   templateUrl: './course-card.component.html',
-  styleUrls: ['./course-card.component.scss']
+  styleUrls: ['./course-card.component.scss'],
 })
 export class CourseCardComponent implements OnInit {
+  @Input() user: User;
+  @Input() courseWithUser: CourseWithUser;
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
