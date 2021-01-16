@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,6 +14,7 @@ import { JudgeQuestionDialogComponent } from '../judge-question-dialog/judge-que
   styleUrls: ['./question.component.scss'],
 })
 export class QuestionComponent implements OnInit {
+  @Input() isCompleted: boolean;
   courseId: string;
   questionNumber: number;
   question$: Observable<Question> = this.route.queryParamMap.pipe(
@@ -55,6 +56,7 @@ export class QuestionComponent implements OnInit {
           selected: this.answerCtrl.value,
           answer: question.answer,
           hint: question.hint,
+          isCompleted: this.isCompleted,
         },
       })
       .afterClosed()

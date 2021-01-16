@@ -26,7 +26,7 @@
       color="primary"
       [matDialogClose]="true"
     >
-      次の問題に進む
+      {{ data.isCompleted ? '結果画面に進む' : '次の問題に進む' }}
     </button>
   </div>
 </mat-dialog-actions>

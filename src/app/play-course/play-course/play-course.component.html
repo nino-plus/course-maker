@@ -1,6 +1,6 @@
 <div class="container">
   <ng-container *ngIf="!isCrear; else crear">
-    <app-question></app-question>
+    <app-question [isCompleted]="isCompleted"></app-question>
   </ng-container>
 
   <ng-template #crear>
