@@ -2,6 +2,6 @@ export interface Question {
   text: string;
   hint?: string;
   answer: string;
-  position: google.maps.LatLng;
-  imageURL: string;
+  mapPosition: google.maps.LatLngLiteral;
+  imageURL?: string;
 }
