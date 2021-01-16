@@ -1,6 +1,21 @@
 .home-wrapper {
+  max-width: 1024px;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 24px;
   padding: 40px 0;
+}
+.title {
+  width: 1000px;
+  display: flex;
+  justify-content: center;
+  margin: 16px auto;
+  img {
+    width: 48px;
+    height: 48px;
+  }
+}
+h1 {
+  color: rgba(black, 0.8);
 }
