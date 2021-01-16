@@ -9,5 +9,6 @@ import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [CourseCardComponent],
   imports: [CommonModule, SharedRoutingModule, MatMenuModule, MatIconModule],
+  exports: [CourseCardComponent],
 })
 export class SharedModule {}
