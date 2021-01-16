@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { combineLatest, Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { Course } from '../interfaces/course';
+import { Course, CourseWithUser } from '../interfaces/course';
 import { User } from '../interfaces/user';
 import { UserService } from './user.service';
 
@@ -12,7 +12,7 @@ import { UserService } from './user.service';
 export class CourseService {
   constructor(private db: AngularFirestore, private userService: UserService) {}
 
-  getCourses() {
+  getCourses(): Observable<CourseWithUser[]> {
     return this.db
       .collection<Course>('courses')
       .valueChanges()
@@ -44,7 +44,4 @@ export class CourseService {
         })
       );
   }
-  // deleteCourse(courseId: string): Promise<void> {
-  //   return this.db.doc<Course>(`courses/${courseId}`).delete();
-  // }
 }
