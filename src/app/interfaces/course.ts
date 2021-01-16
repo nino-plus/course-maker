@@ -1,5 +1,5 @@
 export interface Course {
-  courseId: string;
+  id: string;
   creatorId: string;
   createdAt: Date;
   playCounts: number;

@@ -1,5 +1,5 @@
 <div class="card" *ngIf="author$ | async as author">
-  <!-- <a [routerLink]="['/play-course/', course.id]"></a> -->
+  <a [routerLink]="['/play-course/', course.id]"></a>
   <img
     class="card__image"
     onError="this.src='/assets/images/fake.png'"

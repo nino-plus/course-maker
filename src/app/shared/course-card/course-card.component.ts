@@ -12,7 +12,7 @@ import { CourseService } from 'src/app/services/course.service';
 })
 export class CourseCardComponent implements OnInit {
   @Input() user: User;
-  @Input() article: Course;
+  @Input() course: Course;
 
   author$: Observable<User>;
   // user$: Observable<User> = this.authService.user$;
