@@ -1,4 +1,28 @@
+@import 'mixins';
+@import 'variables';
+
 .image {
-  width: 300px;
-  margin: 0 auto;
+  width: 180px;
+  margin: 2em auto 0;
+  @include pc {
+    width: 240px;
+  }
+}
+
+.base-title {
+  color: $color-main-deep;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-shadow: 1px 1px 0px $color-text, -1px 1px 0px $color-text,
+    1px -1px 0px $color-text, -1px -1px 0px $color-text, 1px 0px 0px $color-text,
+    0px 1px 0px $color-text, -1px 0px 0px $color-text, 0px -1px 0px $color-text;
+  @include pc {
+    font-size: 32px;
+  }
+}
+
+h2 {
+  font-size: 16px;
 }
