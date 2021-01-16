@@ -23,6 +23,7 @@
     "eslint": "^7.6.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-prettier": "^3.3.1",
     "firebase-functions-test": "^0.2.0",
     "typescript": "^3.8.0"
   },

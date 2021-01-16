@@ -5,13 +5,16 @@ import { ShellRoutingModule } from './shell-routing.module';
 import { ShellComponent } from './shell/shell.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
   declarations: [ShellComponent, HeaderComponent, FooterComponent],
   imports: [
     CommonModule,
-    ShellRoutingModule
+    ShellRoutingModule,
+    MatIconModule
+
   ]
 })
 export class ShellModule { }
