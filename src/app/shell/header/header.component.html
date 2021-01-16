@@ -28,7 +28,7 @@
         <mat-icon>settings</mat-icon>
         <span>設定</span>
       </button>
-      <button mat-menu-item (click)="logout()">
+      <button mat-menu-item (click)="authService.logout()">
         <mat-icon>exit_to_app</mat-icon>
         <span>ログアウト</span>
       </button>
@@ -36,6 +36,8 @@
   </div>
 
   <ng-template #showLogin>
-    <button (click)="login()" class="header__btn">ログインする</button>
+    <button (click)="authService.login()" class="header__btn">
+      ログインする
+    </button>
   </ng-template>
 </mat-toolbar>

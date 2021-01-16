@@ -5,6 +5,7 @@ import { map, switchMap } from 'rxjs/operators';
 import { Course, CourseWithUser } from '../interfaces/course';
 import { User } from '../interfaces/user';
 import { UserService } from './user.service';
+import { Question } from '../interfaces/question';
 
 @Injectable({
   providedIn: 'root',
@@ -43,5 +44,23 @@ export class CourseService {
           });
         })
       );
+  }
+
+  getCoursesByCreatorId(creatorId: string): Observable<Course[]> {
+    return this.db
+      .collection<Course>(`courses`, (ref) =>
+        ref.where('creatorId', '==', `${creatorId}`)
+      )
+      .valueChanges();
+  }
+
+  getCourse(courseId: string): Observable<Course> {
+    return this.db.doc<Course>(`courses/${courseId}`).valueChanges();
+  }
+
+  getQuestion(courseId: string, questionNumber: number): Observable<Question> {
+    return this.getCourse(courseId).pipe(
+      map((course) => course.questions[--questionNumber])
+    );
   }
 }
