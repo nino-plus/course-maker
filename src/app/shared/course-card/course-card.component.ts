@@ -24,9 +24,8 @@ export class CourseCardComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private userService: UserService,
-    private courseService: CourseService
-  ) // private snackBar: MatSnackBar
-  {}
+    private courseService: CourseService // private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     // this.creator$ = this.userService
@@ -43,8 +42,5 @@ export class CourseCardComponent implements OnInit {
     //   this.courseService.deleteCourse(this.course.id).then(() => {
     //     this.snackBar.open('削除しました！');
     //   });
-  }
-  test() {
-    console.log('test');
   }
 }
