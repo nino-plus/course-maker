@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Course } from 'src/app/interfaces/course';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { CourseService } from 'src/app/services/course.service';
 
 @Component({
   selector: 'app-course-card',
@@ -17,7 +18,10 @@ export class CourseCardComponent implements OnInit {
   // user$: Observable<User> = this.authService.user$;
   uid: string;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private courseService: CourseService
+  ) {}
 
   ngOnInit(): void {}
 }

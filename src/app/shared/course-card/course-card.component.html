@@ -1,45 +1,45 @@
 <div class="card" *ngIf="author$ | async as author">
-  <a [routerLink]="['/play-course/', course.id]"></a>
+  <!-- <a [routerLink]="['/play-course/', course.id]"></a> -->
   <img
     class="card__image"
     onError="this.src='/assets/images/fake.png'"
-    [src]="course.image"
+    [src]=""
     alt="コースの画像"
   />
   <div class="card__contents">
     <img
       class="card__avatar"
       onError="this.src='/assets/images/fake.png'"
-      [src]="author.avatarURL"
+      [src]=""
       alt="ユーザーアバター"
     />
     <div class="card__items">
-      <a [routerLink]="['/play-course/', course.id]">
+      <a [routerLink]="['/play-course/']">
         <p class="card__title">
-          {{ article.title ? article.title : 'タイトル' }}
+          <!-- {{ article.title ? article.title : 'タイトル' }} -->
         </p>
         <span class="card__date">
-          投稿日:{{
+          <!-- 投稿日:{{
             course.createdAt
               ? (course.createdAt.toDate() | date: 'yyyy/MM/dd')
               : '2020/12/05'
-          }}
+          }} -->
         </span>
       </a>
     </div>
-    <button
+    <!-- <button
       class="card__menu-btn"
       [matMenuTriggerFor]="menuRef"
       mat-icon-button
       *ngIf="uid === article.ownerId"
     >
       <mat-icon>more_vert</mat-icon>
-    </button>
+    </button> -->
     <mat-menu #menuRef="matMenu">
-      <button (click)="deleteCourse(course.id)" mat-menu-item>
+      <!-- <button (click)="deleteCourse(course.id)" mat-menu-item>
         <mat-icon>delete</mat-icon>
         <span>削除</span>
-      </button>
+      </button> -->
     </mat-menu>
   </div>
 </div>
