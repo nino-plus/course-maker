@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { SharedRoutingModule } from './shared-routing.module';
 import { CourseCardComponent } from './course-card/course-card.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [CourseCardComponent],
-  imports: [CommonModule, SharedRoutingModule],
+  imports: [CommonModule, SharedRoutingModule, MatMenuModule, MatIconModule],
 })
 export class SharedModule {}
