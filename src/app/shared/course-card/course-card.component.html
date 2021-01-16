@@ -1,5 +1,5 @@
 <div class="card">
-  <a [routerLink]="['/play-course/', 'QzIz2Q0UlposxdXm3XD6']">
+  <a [routerLink]="['/play-course/', course.courseId]">
     <img class="card__image" src="assets/images/example.png" alt="コース画像" />
   </a>
 
@@ -22,6 +22,7 @@
       [matMenuTriggerFor]="menuRef"
       class="card__menu-btn"
       mat-icon-button
+      *ngIf="uid === course.creatorId"
     >
       <mat-icon class="material-icons"> more_vert </mat-icon>
     </button>
