@@ -1,12 +1,36 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&family=Bungee+Shade&family=Kosugi+Maru&family=Press+Start+2P&family=Yusei+Magic&display=swap');
+
+@import 'mixins';
+@import 'variables';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-family: $font-default;
+  color: $color-text;
+}
+
+.container {
+  width: 100%;
+  max-width: 1008px;
+  margin: 0 auto;
+  padding-left: 16px;
+  padding-right: 16px;
+  @include pc {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 }
 img {
   max-width: 100%;
