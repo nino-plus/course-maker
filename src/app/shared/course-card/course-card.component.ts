@@ -8,7 +8,6 @@ import { User } from 'src/app/interfaces/user';
   styleUrls: ['./course-card.component.scss'],
 })
 export class CourseCardComponent implements OnInit {
-  @Input() user: User;
   @Input() courseWithUser: CourseWithUser;
   constructor() {}
 
