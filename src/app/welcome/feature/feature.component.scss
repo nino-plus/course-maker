@@ -39,6 +39,7 @@
     box-shadow: 2px 2px 0 $color-text;
     transform: translate(-2px, -2px);
     transition: 0.4s;
+    outline: none;
     @include pc {
       font-size: 18px;
     }
