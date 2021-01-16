@@ -1,1 +1,93 @@
-<p>create-course works!</p>
+<mat-horizontal-stepper [linear]="false" #stepper>
+  <mat-step>
+    <form [formGroup]="form">
+      <ng-template matStepLabel>タイトル</ng-template>
+      <mat-form-field>
+        <mat-label>タイトル</mat-label>
+        <input
+          matInput
+          formControlName="title"
+          placeholder="タイトル"
+          required
+        />
+      </mat-form-field>
+
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>1問目</ng-template>
+    <form [formGroup]="form">
+      <div formGroupName="question">
+        <mat-form-field>
+          <mat-label>問題文</mat-label>
+          <input
+            matInput
+            autocomplete="off"
+            formControlName="text"
+            placeholder="？"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>ヒント</mat-label>
+          <input
+            matInput
+            autocomplete="off"
+            formControlName="hint"
+            placeholder="ヒント"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>答え</mat-label>
+          <input
+            matInput
+            autocomplete="off"
+            formControlName="hint"
+            placeholder="答え"
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="image">
+        <div class="image__label">画像を投稿</div>
+        <div class="cropper">
+          <deer-crop-trigger
+            (image)="onCroppedImage($event)"
+          ></deer-crop-trigger>
+        </div>
+      </div>
+
+      <google-map
+        height="400px"
+        width="750px"
+        [center]="center"
+        [zoom]="zoom"
+        (mapClick)="moveMap($event)"
+      >
+        <map-marker
+          *ngIf="markerPosition"
+          [position]="markerPosition"
+        ></map-marker>
+      </google-map>
+
+      <div>緯度: {{ markerPosition?.lat }}</div>
+      <div>経度: {{ markerPosition?.lng }}</div>
+      <!-- <div>{{ form.get('question').get('text').value }}</div> -->
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>完了</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button (click)="stepper.previous()">Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

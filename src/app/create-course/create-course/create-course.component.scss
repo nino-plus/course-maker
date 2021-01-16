@@ -1,0 +1,14 @@
+.image {
+  margin: 16px auto 32px;
+  padding: 16px 0;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.04);
+  &__label {
+    margin-bottom: 12px;
+  }
+}
+
+.cropper {
+  width: 232px;
+  display: inline-block;
+}
