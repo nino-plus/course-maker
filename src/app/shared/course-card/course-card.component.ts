@@ -14,7 +14,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./course-card.component.scss'],
 })
 export class CourseCardComponent implements OnInit {
-  @Input() user: User;
   @Input() courseWithUser: CourseWithUser;
 
   user$: Observable<User> = this.authService.user$;
