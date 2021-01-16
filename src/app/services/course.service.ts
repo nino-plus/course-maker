@@ -14,4 +14,7 @@ export class CourseService {
       .collection<Course>('courses', (ref) => ref.orderBy('createdAt', 'desc'))
       .valueChanges();
   }
+  deleteCourse(id: string): Promise<void> {
+    return this.db.doc<Course>(`courses/${id}`).delete();
+  }
 }
