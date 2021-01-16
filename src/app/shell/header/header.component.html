@@ -8,7 +8,11 @@
   >
   <span class="header__spacer"></span>
   <div class="header__items" *ngIf="user$ | async as user; else showLogin">
-    <button class="header__btn" routerLink="/create" routerLinkActive="active">
+    <button
+      class="header__btn"
+      routerLink="/create-course"
+      routerLinkActive="active"
+    >
       コースを作成する
     </button>
 

@@ -11,6 +11,14 @@ import { Question } from '../interfaces/question';
 export class CourseService {
   constructor(private db: AngularFirestore) {}
 
+  getCoursesByCreatorId(creatorId: string): Observable<Course[]> {
+    return this.db
+      .collection<Course>(`courses`, (ref) =>
+        ref.where('creatorId', '==', `${creatorId}`)
+      )
+      .valueChanges();
+  }
+
   getCourse(courseId: string): Observable<Course> {
     return this.db.doc<Course>(`courses/${courseId}`).valueChanges();
   }
