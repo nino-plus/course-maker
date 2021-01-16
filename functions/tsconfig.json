@@ -9,8 +9,5 @@
     "target": "es2017"
   },
   "compileOnSave": true,
-  "include": [
-    ".eslintrc.js",
-    "src"
-  ]
+  "include": [".eslintrc.js", "src"]
 }

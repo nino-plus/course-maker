@@ -35,7 +35,7 @@ export class AuthService {
     this.afAuth.signInWithPopup(provider);
   }
 
-  logout(){
+  logout() {
     this.afAuth.signOut().then(() => this.router.navigateByUrl('/welcome'));
   }
 }
