@@ -1,7 +1,8 @@
 export interface Course {
+  title: string;
   courseId: string;
   creatorId: string;
   createdAt: Date;
-  playCounts: number;
-  clearUserCounts: number;
+  playCount: number;
+  clearUserCount: number;
 }
