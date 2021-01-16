@@ -4,4 +4,5 @@ export interface Course {
   createdAt: Date;
   playCounts: number;
   clearUserCounts: number;
+  title: string;
 }
