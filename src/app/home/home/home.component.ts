@@ -13,5 +13,9 @@ export class HomeComponent implements OnInit {
 
   constructor(private courseService: CourseService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.courseService
+      .getCourses()
+      .subscribe((courses) => console.log(courses));
+  }
 }
