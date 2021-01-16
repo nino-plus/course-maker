@@ -1,7 +1,7 @@
 <mat-toolbar class="header">
-  <span><h1 class="header__logo" routerLink="/">CourseMaker</h1></span>
+  <span><h1 class="header__logo"><a class="header__link" routerLink="/" routerLinkActive="active">CourseMaker</a> </h1></span>
   <span class="header__spacer"></span>
-  <div class="header__items"  *ngIf="user$ |async as user">
+  <div class="header__items"  *ngIf="user$ |async as user; else showLogin">
 
     <button class="header__btn" routerLink="/create" routerLinkActive="active">
       コースを作成する
@@ -25,4 +25,13 @@
     </button>
     </mat-menu>
   </div>
+
+  <ng-template #showLogin>
+    <button
+      (click)="login()"
+      class="header__btn"
+    >
+      ログインする
+    </button>
+  </ng-template>
 </mat-toolbar>
