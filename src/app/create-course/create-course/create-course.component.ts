@@ -6,6 +6,7 @@ import { Course } from 'src/app/interfaces/course';
 import { Question } from 'src/app/interfaces/question';
 import { AuthService } from 'src/app/services/auth.service';
 import { CourseService } from 'src/app/services/course.service';
+import firebase from 'firebase/app';
 
 @Component({
   selector: 'app-create-course',
@@ -121,7 +122,7 @@ export class CreateCourseComponent implements OnInit {
     const newValue: Course = {
       courseId,
       creatorId: this.authService.uid,
-      createdAt: Date.now(),
+      createdAt: firebase.firestore.Timestamp.now(),
       title: this.form.get('title').value,
       questions,
       playCount: 0,
