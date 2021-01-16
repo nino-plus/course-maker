@@ -10,7 +10,7 @@ export const createUser = functions
     return db.doc(`users/${user.uid}`).set({
       uid: user.uid,
       displayName: user.displayName,
-      avatarURL: user.photoURL,
+      avatarUrl: user.photoURL,
       createdAt: new Date(),
     });
   });

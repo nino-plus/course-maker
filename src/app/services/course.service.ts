@@ -5,6 +5,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { Course } from '../interfaces/course';
 import { Question } from '../interfaces/question';
 import { AuthService } from './auth.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -20,14 +21,11 @@ export class CourseService {
     await this.db.doc<Course>(`courses/${course.courseId}`).set(course);
   }
 
-  async setImageToStorage(
-    couseId: string,
-    file: string,
-    i: number
-  ): Promise<string> {
-    const result = await this.storage
-      .ref(`courses/${couseId}/question${i}`)
-      .putString(file, 'data_url');
-    return result.ref.getDownloadURL();
+  getCoursesByCreatorId(creatorId: string): Observable<Course[]> {
+    return this.db
+      .collection<Course>(`courses`, (ref) =>
+        ref.where('creatorId', '==', `${creatorId}`)
+      )
+      .valueChanges();
   }
 }
