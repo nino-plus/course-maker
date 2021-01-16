@@ -18,6 +18,8 @@
         >
       </a>
     </div>
+
+    <!-- 自分が作ったコースなら、削除できるボタンを表示 -->
     <button
       [matMenuTriggerFor]="menuRef"
       class="card__menu-btn"
@@ -27,6 +29,7 @@
       <mat-icon class="material-icons"> more_vert </mat-icon>
     </button>
     <mat-menu #menuRef="matMenu">
+      <!-- ここのボタンにdeleteCourse()のクリックを設定する -->
       <button mat-menu-item>
         <mat-icon>delete</mat-icon>
         <span>削除</span>
