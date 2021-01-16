@@ -11,11 +11,7 @@ export class CourseService {
 
   getCourses(): Observable<Course[]> {
     return this.db
-      .collection<Course>('posts', (ref) => ref.orderBy('createdAt', 'desc'))
+      .collection<Course>('courses', (ref) => ref.orderBy('createdAt', 'desc'))
       .valueChanges();
-  }
-
-  deleteCourse(id: string): Promise<void> {
-    return this.db.doc<Course>(`posts/${id}`).delete();
   }
 }
