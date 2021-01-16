@@ -124,8 +124,8 @@ export class CreateCourseComponent implements OnInit {
       createdAt: Date.now(),
       title: this.form.get('title').value,
       questions,
-      playCounts: 0,
-      clearUserCounts: 0,
+      playCount: 0,
+      clearUserCount: 0,
     };
 
     this.courseService.createCourse(newValue);
