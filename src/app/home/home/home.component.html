@@ -3,8 +3,5 @@
   <img src="assets/images/list_image.png" alt="" />
 </div>
 <div class="home-wrapper" *ngIf="courses$ | async as courses">
-  <app-course-card
-    *ngFor="let course of courses"
-    [courseWithUser]="course"
-  ></app-course-card>
+  <app-course-card></app-course-card>
 </div>
