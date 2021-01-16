@@ -1,7 +1,8 @@
+import firebase from 'firebase/app';
 export interface Course {
-  id: string;
+  courseId: string;
   creatorId: string;
-  createdAt: Date;
+  createdAt: firebase.firestore.Timestamp;
   playCounts: number;
   clearUserCounts: number;
   title: string;

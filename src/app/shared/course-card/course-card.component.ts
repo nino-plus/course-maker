@@ -17,15 +17,15 @@ export class CourseCardComponent implements OnInit {
   @Input() user: User;
   @Input() course: Course;
 
-  // creator$: Observable<User>;
   user$: Observable<User> = this.authService.user$;
   uid: string;
 
   constructor(
     private authService: AuthService,
     private userService: UserService,
-    private courseService: CourseService // private snackBar: MatSnackBar
-  ) {}
+    private courseService: CourseService
+  ) // private snackBar: MatSnackBar
+  {}
 
   ngOnInit(): void {
     // this.creator$ = this.userService
@@ -37,10 +37,10 @@ export class CourseCardComponent implements OnInit {
     //   .then((user) => {
     //     this.uid = user.uid;
     //     });
-    // }
-    // deleteCourse(): void {
-    //   this.courseService.deleteCourse(this.course.id).then(() => {
-    //     this.snackBar.open('削除しました！');
-    //   });
   }
+  //   deleteCourse(): void {
+  //     this.courseService.deleteCourse(this.course.courseId).then(() => {
+  //       this.snackBar.open('削除しました！');
+  //     });
+  // }
 }

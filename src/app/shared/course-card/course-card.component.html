@@ -1,14 +1,21 @@
 <div class="card">
-  <a [routerLink]="">
+  <a [routerLink]="['/play-course/', 'QzIz2Q0UlposxdXm3XD6']">
     <img class="card__image" src="assets/images/example.png" alt="コース画像" />
   </a>
+
   <div class="card__contents">
     <img class="card__avatar" src="https://placehold.jp/80x80.png" alt="" />
 
     <div class="card__items">
       <a [routerLink]="">
         <p class="card__title">コースタイトル</p>
-        <span class="card__date"> 投稿日:2021/01/16 </span>
+        <span class="card__date">
+          作成日:{{
+            course.createdAt
+              ? (course.createdAt.toDate() | date: 'yyyy/MM/dd')
+              : '2020/12/05'
+          }}</span
+        >
       </a>
     </div>
     <button
