@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.user$.subscribe((user) => {
-      this.avatarUrl = user.avatarUrl;
+      this.avatarUrl = user?.avatarUrl;
     });
   }
 
