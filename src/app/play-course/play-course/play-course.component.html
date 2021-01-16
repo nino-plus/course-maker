@@ -1,1 +1,9 @@
-<p>play-course works!</p>
+<div class="container">
+  <ng-container *ngIf="!isCrear; else crear">
+    <app-question></app-question>
+  </ng-container>
+
+  <ng-template #crear>
+    <h1>この問題は既に正解しました</h1>
+  </ng-template>
+</div>

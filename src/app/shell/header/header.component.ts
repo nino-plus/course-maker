@@ -10,14 +10,13 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
   user$: Observable<User> = this.authService.user$;
-  avatarUrl: string
+  avatarUrl: string;
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.user$.subscribe((user) => {
-      this.avatarUrl = user.avatarUrl;
-
-    })
+      this.avatarUrl = user?.avatarUrl;
+    });
   }
 
   login() {
