@@ -18,7 +18,7 @@ export class QuestionComponent implements OnInit {
   questionNumber: number;
   question$: Observable<Question> = this.route.queryParamMap.pipe(
     tap(() => {
-      this.answerCtrl.setValue(null);
+      this.answerCtrl.reset();
     }),
     switchMap((params) => {
       if (params) {
