@@ -1,1 +1,104 @@
-<p>create-course works!</p>
+<div class="container">
+  <mat-horizontal-stepper [linear]="false" #stepper>
+    <mat-step>
+      <form [formGroup]="form">
+        <ng-template matStepLabel>タイトル</ng-template>
+        <mat-form-field>
+          <mat-label>タイトル</mat-label>
+          <input
+            matInput
+            formControlName="title"
+            placeholder="タイトル"
+            required
+          />
+        </mat-form-field>
+
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <div [formGroup]="form">
+      <div formArrayName="questions">
+        <ng-container
+          *ngFor="let question of questionForms.controls; index as i"
+        >
+          <mat-step>
+            <ng-template matStepLabel>{{ i + 1 }}問目</ng-template>
+
+            <div [formGroupName]="i">
+              <mat-form-field>
+                <mat-label>問題文</mat-label>
+                <input
+                  matInput
+                  autocomplete="off"
+                  formControlName="text"
+                  placeholder="？"
+                  required
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>ヒント</mat-label>
+                <input
+                  matInput
+                  autocomplete="off"
+                  formControlName="hint"
+                  placeholder="ヒント"
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>答え</mat-label>
+                <input
+                  matInput
+                  autocomplete="off"
+                  formControlName="answer"
+                  placeholder="答え"
+                  required
+                />
+              </mat-form-field>
+            </div>
+            <div class="image">
+              <div class="image__label">画像を投稿</div>
+              <div class="cropper">
+                <deer-crop-trigger
+                  (image)="onCroppedImage($event, i)"
+                ></deer-crop-trigger>
+              </div>
+            </div>
+
+            <google-map
+              height="400px"
+              width="750px"
+              [center]="center"
+              [zoom]="zoom"
+              (mapClick)="setMarker($event, i)"
+            >
+              <map-marker
+                *ngIf="markerPositions[i]"
+                [position]="markerPositions[i]"
+              ></map-marker>
+            </google-map>
+
+            <div>緯度: {{ markerPositions[i]?.lat }}</div>
+            <div>経度: {{ markerPositions[i]?.lng }}</div>
+            <!-- <div>{{ form.get('question').get('text').value }}</div> -->
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </mat-step>
+        </ng-container>
+      </div>
+    </div>
+
+    <mat-step>
+      <ng-template matStepLabel>完了</ng-template>
+
+      <div>
+        <button mat-button (click)="stepper.previous()">Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+        <button mat-button (click)="submit()">done</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

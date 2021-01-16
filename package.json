@@ -28,6 +28,8 @@
     "@angular/platform-browser": "~11.0.9",
     "@angular/platform-browser-dynamic": "~11.0.9",
     "@angular/router": "~11.0.9",
+    "@deer-inc/ngx-croppie": "0.0.17",
+    "croppie": "^2.6.5",
     "firebase": "^7.0 || ^8.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

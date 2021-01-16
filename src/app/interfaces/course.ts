@@ -6,8 +6,8 @@ export interface Course {
   courseId: string;
   creatorId: string;
   createdAt: firebase.firestore.Timestamp;
-  playCounts: number;
-  clearUserCounts: number;
+  playCount: number;
+  clearUserCount: number;
   questions: Question[];
 }
 
