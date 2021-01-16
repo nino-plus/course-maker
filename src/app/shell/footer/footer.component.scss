@@ -1,0 +1,10 @@
+@import 'mixins';
+@import 'variables';
+
+.footer {
+  background: #f4f4f5;
+  padding: 60px 0 30px;
+  &__sentence{
+    font: $font-bs;
+  }
+}
