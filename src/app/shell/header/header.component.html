@@ -1,9 +1,28 @@
-<header>
-  <button (click)="login()" class="twitter" mat-raised-button>
-    <mat-icon class="sns-icon fab fa-twitter"></mat-icon>ログイン
-  </button>
+<mat-toolbar class="header">
+  <span><h1 class="header__logo" routerLink="/">CourseMaker</h1></span>
+  <span class="header__spacer"></span>
+  <div class="header__items"  *ngIf="user$ |async as user">
 
-  <button (click)="logout()" class="twitter" mat-raised-button>
-    <mat-icon class="sns-icon fab fa-twitter"></mat-icon>ログアウト
-  </button>
-</header>
+    <button class="header__btn" routerLink="/create" routerLinkActive="active">
+      コースを作成する
+    </button>
+
+    <img
+    class="header__profileImage"
+    [src]="avatarUrl"
+    alt="プロフィール画像"
+    [matMenuTriggerFor]="menu"
+    >
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/user/{{user.uid}}">
+      <mat-icon>settings</mat-icon>
+      <span>設定</span>
+    </button>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+      <span>ログアウト</span>
+    </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
