@@ -1,27 +1,20 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { AuthService } from './auth.service';
 import { combineLatest, Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Course, CourseWithUser } from '../interfaces/course';
+import { Question } from '../interfaces/question';
 import { User } from '../interfaces/user';
 import { UserService } from './user.service';
-import { Question } from '../interfaces/question';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CourseService {
-  constructor(
-    private db: AngularFirestore,
-    private authService: AuthService,
-    private storage: AngularFireStorage,
-    private userService: UserService
-  ) {}
+  constructor(private db: AngularFirestore, private userService: UserService) {}
 
-  async createCourse(course: Course) {
-    await this.db.doc<Course>(`courses/${course.courseId}`).set(course);
+  createCourse(course: Course): Promise<void> {
+    return this.db.doc<Course>(`courses/${course.courseId}`).set(course);
   }
 
   getCourses(): Observable<CourseWithUser[]> {
