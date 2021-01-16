@@ -21,7 +21,7 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'play-course',
+        path: 'play-course/:id',
         loadChildren: () =>
           import('../play-course/play-course.module').then(
             (m) => m.PlayCourseModule

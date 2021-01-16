@@ -3,13 +3,21 @@ import { CommonModule } from '@angular/common';
 
 import { SharedRoutingModule } from './shared-routing.module';
 import { CourseCardComponent } from './course-card/course-card.component';
-
+import { MatButtonModule } from '@angular/material/button';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [CourseCardComponent],
-  imports: [
+  imports: [CommonModule, SharedRoutingModule, MatButtonModule],
+  exports: [
     CommonModule,
-    SharedRoutingModule
-  ]
+    MatButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

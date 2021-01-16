@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-play-course',
   templateUrl: './play-course.component.html',
-  styleUrls: ['./play-course.component.scss']
+  styleUrls: ['./play-course.component.scss'],
 })
 export class PlayCourseComponent implements OnInit {
+  isStart: boolean;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
