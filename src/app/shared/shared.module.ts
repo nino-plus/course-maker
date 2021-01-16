@@ -30,6 +30,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
+    CourseCardComponent,
   ],
 })
 export class SharedModule {}

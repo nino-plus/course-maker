@@ -1,12 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { Course } from 'src/app/interfaces/course';
+import { Course, CourseWithUser } from 'src/app/interfaces/course';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { CourseService } from 'src/app/services/course.service';
 import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import firebase from 'firebase/app';
 
 @Component({
   selector: 'app-course-card',
@@ -15,17 +16,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class CourseCardComponent implements OnInit {
   @Input() user: User;
-  @Input() course: Course;
+  @Input() courseWithUser: CourseWithUser;
 
   user$: Observable<User> = this.authService.user$;
   uid: string;
+  // createdAt: firebase.firestore.Timestamp;
 
   constructor(
     private authService: AuthService,
     private userService: UserService,
-    private courseService: CourseService
-  ) // private snackBar: MatSnackBar
-  {}
+    private courseService: CourseService // private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     // this.creator$ = this.userService

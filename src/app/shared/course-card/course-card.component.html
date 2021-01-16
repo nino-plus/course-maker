@@ -1,30 +1,29 @@
 <div class="card">
-  <a [routerLink]="['/play-course/', course.courseId]">
+  <a [routerLink]="['/play-course/', courseWithUser.courseId]">
     <img class="card__image" src="assets/images/example.png" alt="コース画像" />
   </a>
 
   <div class="card__contents">
-    <img class="card__avatar" src="https://placehold.jp/80x80.png" alt="" />
+    <img class="card__avatar" [src]="courseWithUser.user.avatarUrl" alt="" />
 
     <div class="card__items">
       <a [routerLink]="">
         <p class="card__title">コースタイトル</p>
         <span class="card__date">
           作成日:{{
-            course.createdAt
-              ? (course.createdAt.toDate() | date: 'yyyy/MM/dd')
+            courseWithUser.createdAt
+              ? (courseWithUser.createdAt.toDate() | date: 'yyyy/MM/dd')
               : '2020/12/05'
           }}</span
         >
       </a>
     </div>
 
-    <!-- 自分が作ったコースなら、削除できるボタンを表示 -->
     <button
       [matMenuTriggerFor]="menuRef"
       class="card__menu-btn"
       mat-icon-button
-      *ngIf="uid === course.creatorId"
+      *ngIf="courseWithUser.creatorId"
     >
       <mat-icon class="material-icons"> more_vert </mat-icon>
     </button>
