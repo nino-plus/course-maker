@@ -1,7 +1,10 @@
-<h1>コース一覧</h1>
+<div class="title">
+  <h1>コース一覧</h1>
+  <img src="assets/images/list_image.png" alt="" />
+</div>
 <div class="home-wrapper" *ngIf="courses$ | async as courses">
   <app-course-card
     *ngFor="let course of courses"
-    [course]="course"
+    [courseWithUser]="course"
   ></app-course-card>
 </div>
