@@ -21,7 +21,12 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'play-course/:id',
+        path: 'course/:id',
+        loadChildren: () =>
+          import('../course/course.module').then((m) => m.CourseModule),
+      },
+      {
+        path: 'play-course',
         loadChildren: () =>
           import('../play-course/play-course.module').then(
             (m) => m.PlayCourseModule

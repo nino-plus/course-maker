@@ -1,10 +1,7 @@
-<ng-container *ngIf="!isStart; else question">
-  <h1>テストコースをプレイする</h1>
-  <button mat-raised-button color="primary" (click)="isStart = true">
-    プレイ
-  </button>
+<ng-container *ngIf="!isCrear; else crear">
+  <app-question></app-question>
 </ng-container>
 
-<ng-template #question>
-  <app-question></app-question>
+<ng-template #crear>
+  <h1>この問題は既に正解しました</h1>
 </ng-template>

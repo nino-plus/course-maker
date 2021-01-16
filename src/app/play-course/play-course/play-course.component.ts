@@ -7,7 +7,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./play-course.component.scss'],
 })
 export class PlayCourseComponent implements OnInit {
-  isStart: boolean;
+  isCrear: boolean;
 
   constructor() {}
 
