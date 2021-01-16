@@ -13,6 +13,7 @@ export class JudgeQuestionDialogComponent implements OnInit {
     public data: {
       selected: string;
       answer: string;
+      hint: string;
     }
   ) {}
 

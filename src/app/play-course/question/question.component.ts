@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { switchMap, take, tap } from 'rxjs/operators';
+import { Question } from 'src/app/interfaces/question';
+import { CourseService } from 'src/app/services/course.service';
 import { JudgeQuestionDialogComponent } from '../judge-question-dialog/judge-question-dialog.component';
 
 @Component({
@@ -12,23 +16,36 @@ import { JudgeQuestionDialogComponent } from '../judge-question-dialog/judge-que
 export class QuestionComponent implements OnInit {
   courseId: string;
   questionNumber: number;
+  question$: Observable<Question> = this.route.queryParamMap.pipe(
+    tap(() => {
+      this.answerCtrl.setValue(null);
+    }),
+    switchMap((params) => {
+      if (params) {
+        this.courseId = params.get('courseId');
+        this.questionNumber = parseInt(params.get('questionNumber'), 10);
+        this.courseId = 'QzIz2Q0UlposxdXm3XD6';
+        return this.courseService
+          .getQuestion(this.courseId, this.questionNumber)
+          .pipe(take(1));
+      } else {
+        return of(null);
+      }
+    })
+  );
+
   answerCtrl = new FormControl();
 
   constructor(
     private dialog: MatDialog,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private courseService: CourseService
   ) {}
 
-  ngOnInit(): void {
-    this.route.queryParamMap.subscribe((params) => {
-      this.courseId = params.get('courseId');
-      this.questionNumber = parseInt(params.get('questionNumber'), 10);
-      this.answerCtrl.setValue(null);
-    });
-  }
+  ngOnInit(): void {}
 
-  openJudgeDialog(): void {
+  openJudgeDialog(question: Question): void {
     this.dialog
       .open(JudgeQuestionDialogComponent, {
         width: '800px',
@@ -36,7 +53,8 @@ export class QuestionComponent implements OnInit {
         autoFocus: false,
         data: {
           selected: this.answerCtrl.value,
-          answer: 'test',
+          answer: question.answer,
+          hint: question.hint,
         },
       })
       .afterClosed()
