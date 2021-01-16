@@ -17,31 +17,34 @@ export class CourseCardComponent implements OnInit {
   @Input() user: User;
   @Input() course: Course;
 
-  creator$: Observable<User>;
+  // creator$: Observable<User>;
   user$: Observable<User> = this.authService.user$;
   uid: string;
 
   constructor(
     private authService: AuthService,
-    private courseService: CourseService,
     private userService: UserService,
-    private snackBar: MatSnackBar
-  ) {}
+    private courseService: CourseService
+  ) // private snackBar: MatSnackBar
+  {}
 
   ngOnInit(): void {
-    this.creator$ = this.userService
-      .getUser(this.course.creatorId)
-      .pipe(take(1));
-    this.user$
-      .pipe(take(1))
-      .toPromise()
-      .then((user) => {
-        this.uid = user.uid;
-      });
+    // this.creator$ = this.userService
+    //   .getUser(this.course.creatorId)
+    //   .pipe(take(1));
+    // this.user$
+    //   .pipe(take(1))
+    //   .toPromise()
+    //   .then((user) => {
+    //     this.uid = user.uid;
+    //     });
+    // }
+    // deleteCourse(): void {
+    //   this.courseService.deleteCourse(this.course.id).then(() => {
+    //     this.snackBar.open('削除しました！');
+    //   });
   }
-  deleteCourse(): void {
-    this.courseService.deleteCourse(this.course.id).then(() => {
-      this.snackBar.open('削除しました！');
-    });
+  test() {
+    console.log('test');
   }
 }

@@ -1,42 +1,25 @@
-<div class="card" *ngIf="creator$ | async as creator">
-  <a [routerLink]="['/play-course/', course.id]"></a>
-  <img
-    class="card__image"
-    onError="this.src='/assets/images/fake.png'"
-    src="course.image.png"
-    alt="コースの画像"
-  />
+<div class="card">
+  <a [routerLink]="">
+    <img class="card__image" src="assets/images/eample.png" alt="コース画像" />
+  </a>
   <div class="card__contents">
-    <img
-      class="card__avatar"
-      onError="this.src='/assets/images/fake.png'"
-      [src]="user.avatarUrl"
-      alt="ユーザーアバター"
-    />
+    <img class="card__avatar" src="https://placehold.jp/80x80.png" alt="" />
+
     <div class="card__items">
-      <a [routerLink]="['/play-course/']">
-        <p class="card__title">
-          {{ course.title ? course.title : 'タイトル' }}
-        </p>
-        <span class="card__date">
-          投稿日:{{
-            course.createdAt
-              ? (course.createdAt | date: 'yyyy/MM/dd')
-              : '2020/12/05'
-          }}
-        </span>
+      <a [routerLink]="">
+        <p class="card__title">コースタイトル</p>
+        <span class="card__date"> 投稿日:2021/01/16 </span>
       </a>
     </div>
     <button
-      class="card__menu-btn"
       [matMenuTriggerFor]="menuRef"
+      class="card__menu-btn"
       mat-icon-button
-      *ngIf="uid === course.creatorId"
     >
-      <mat-icon>more_vert</mat-icon>
+      <mat-icon class="material-icons"> more_vert </mat-icon>
     </button>
     <mat-menu #menuRef="matMenu">
-      <button (click)="deleteCourse(course.id)" mat-menu-item>
+      <button mat-menu-item>
         <mat-icon>delete</mat-icon>
         <span>削除</span>
       </button>

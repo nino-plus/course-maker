@@ -21,4 +21,27 @@
     padding: 24px 16px;
     margin: auto 0;
   }
+  &__avatar {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 48px;
+    height: 48px;
+    margin-right: 16px;
+  }
+  &__items {
+    margin-right: 16px;
+  }
+  &__title {
+    margin: 0;
+    margin-bottom: 4px;
+    word-break: break-all;
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: 800;
+  }
+  &__date {
+    font-size: 12px;
+    opacity: 0.37;
+    word-wrap: break-word;
+  }
 }
