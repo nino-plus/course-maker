@@ -1,0 +1,50 @@
+@import 'mixins';
+@import 'variables';
+
+.feature {
+  padding: 40px 0;
+  background-color: $color-main;
+  text-align: center;
+  @include pc {
+    padding: 60px 0;
+  }
+  &__title {
+    font-size: 14px;
+    line-height: 1.75;
+    @include pc {
+      font-size: 24px;
+    }
+  }
+  &__actions {
+    margin-top: 1em;
+    text-align: center;
+    @include pc {
+      margin-top: 2em;
+    }
+  }
+  &__btn {
+    cursor: pointer;
+    display: inline-block;
+    background: none;
+    background-color: #fff;
+    padding: 0.75em 2em;
+    color: $color-text;
+    text-decoration: none;
+    border: 2px solid $color-text;
+    border-radius: 50px;
+    font-family: $font-default;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    box-shadow: 2px 2px 0 $color-text;
+    transform: translate(-2px, -2px);
+    transition: 0.4s;
+    @include pc {
+      font-size: 18px;
+    }
+    &:hover {
+      box-shadow: 0 0 0 $color-text;
+      transform: translate(0, 0);
+    }
+  }
+}
