@@ -1,9 +1,17 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { Course } from '../interfaces/course';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CourseService {
+  constructor(private db: AngularFirestore) {}
 
-  constructor() { }
+  getCourses(): Observable<Course[]> {
+    return this.db
+      .collection<Course>('posts', (ref) => ref.orderBy('createdAt', 'desc'))
+      .valueChanges();
+  }
 }
