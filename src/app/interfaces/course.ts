@@ -1,3 +1,5 @@
+import { Question } from './question';
+
 export interface Course {
   title: string;
   courseId: string;
@@ -5,4 +7,5 @@ export interface Course {
   createdAt: Date;
   playCount: number;
   clearUserCount: number;
+  questions: Question[];
 }
