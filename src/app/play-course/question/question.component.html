@@ -1,0 +1,31 @@
+<div class="container">
+  <ng-container *ngIf="question$ | async as question">
+    <h1>問題{{ questionNumber }}</h1>
+
+    <h2>{{ question.title }}</h2>
+
+    <p>地図から答えを導き出そう！</p>
+
+    <google-map height="500px" width="500px"></google-map>
+
+    <form (ngSubmit)="openJudgeDialog(question)">
+      <mat-form-field>
+        <mat-label>答えを入力</mat-label>
+        <input [formControl]="answerCtrl" matInput autocomplete="off" />
+        <mat-hint>ひらがなで入力してください</mat-hint>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="answerCtrl.pristine || answerCtrl.invalid"
+      >
+        答える
+      </button>
+    </form>
+
+    <button mat-button routerLink="/">コース選択に戻る</button>
+    <button mat-button [routerLink]="['/course', 'fafafa']">
+      スタート画面に戻る
+    </button>
+  </ng-container>
+</div>

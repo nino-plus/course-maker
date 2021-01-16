@@ -1,0 +1,175 @@
+@import 'mixins';
+@import 'variables';
+
+.useage {
+  padding: 40px 0;
+  @include pc {
+    padding: 60px 0;
+  }
+  &__inner {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding-left: 16px;
+    padding-right: 16px;
+    @include pc {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+  }
+  &__title {
+    position: relative;
+    padding: 0.5em 1em;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-align: center;
+    border-top: 4px solid $color-text;
+    border-bottom: 4px solid $color-text;
+    @include pc {
+      font-size: 32px;
+    }
+    &::before {
+      content: '';
+      left: 50%;
+      transform: translateX(-50%);
+      position: absolute;
+      bottom: -24px;
+      border: 12px solid transparent;
+      border-top: 12px solid #fff;
+      z-index: 2;
+    }
+    &::after {
+      content: '';
+      left: 50%;
+      transform: translateX(-50%);
+      position: absolute;
+      bottom: -33px;
+      border: 16px solid transparent;
+      border-top: 16px solid $color-text;
+      z-index: 1;
+    }
+  }
+  &__list {
+    margin-top: 2em;
+    counter-reset: num;
+    @include pc {
+      margin-top: 4em;
+    }
+  }
+  &__data {
+    margin: 0;
+    @include pc {
+      display: flex;
+    }
+    & + & {
+      margin-top: 3em;
+    }
+  }
+  &__img {
+    position: relative;
+    @include pc {
+      width: calc(50% - 24px);
+      margin-right: 24px;
+    }
+  }
+  &__screen {
+    display: block;
+    border-radius: 4px;
+    width: 100%;
+    overflow: hidden;
+  }
+  &__deco {
+    position: absolute;
+    bottom: 0;
+    right: -30px;
+    display: block;
+    width: 120px;
+  }
+  &__contents {
+    margin-top: 1em;
+    @include pc {
+      margin-top: 0;
+      width: 50%;
+    }
+  }
+  &__dt {
+    position: relative;
+    padding-left: 40px;
+    font-size: 18px;
+    line-height: 1.5;
+    @include pc {
+      font-size: 20px;
+    }
+    &::before {
+      counter-increment: num;
+      font-size: 16px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      content: counter(num);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 27px;
+      height: 27px;
+      border-radius: 27px;
+      line-height: 1;
+      border: 2px solid $color-text;
+      background-color: $color-main;
+      @include pc {
+        width: 30px;
+        height: 30px;
+        border-radius: 30px;
+      }
+    }
+  }
+  &__dd {
+    margin: 1em 0 0 40px;
+    line-height: 1.75;
+    font-size: 14px;
+    @include pc {
+      font-size: 16px;
+    }
+  }
+  &__chasuke {
+    display: none;
+    width: 120px;
+    margin-left: auto;
+    margin-top: 2em;
+    @include pc {
+      display: block;
+    }
+    img {
+      display: block;
+      width: 100%;
+    }
+  }
+  &__actions {
+    margin-top: 2em;
+    text-align: center;
+    @include pc {
+      margin-top: 4em;
+    }
+  }
+  &__btn {
+    display: inline-block;
+    padding: 0.75em 2em;
+    color: $color-text;
+    text-decoration: none;
+    border: 2px solid $color-text;
+    border-radius: 50px;
+    font-size: 14px;
+    line-height: 1;
+    box-shadow: 2px 2px 0 $color-text;
+    transform: translate(-2px, -2px);
+    transition: 0.4s;
+    @include pc {
+      font-size: 18px;
+    }
+    &:hover {
+      box-shadow: 0 0 0 $color-text;
+      transform: translate(0, 0);
+    }
+  }
+}
