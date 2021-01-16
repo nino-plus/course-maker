@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "course-maker"
+  "defaultProject": "course-maker",
+  "cli": {
+    "analytics": false
+  }
 }
