@@ -31,7 +31,7 @@ export class CreateCourseComponent implements OnInit {
   thumbnail: string;
 
   isEditable = false;
-  maxTitleLength = 30;
+  maxTitleLength = 100;
 
   get questionForms() {
     return this.form.get('questions') as FormArray;
