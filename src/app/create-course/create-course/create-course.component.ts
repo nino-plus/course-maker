@@ -71,7 +71,7 @@ export class CreateCourseComponent implements OnInit {
       ],
       questions: this.fb.array([
         this.fb.group({
-          text: [
+          title: [
             '',
             [Validators.required, Validators.maxLength(this.maxTitleLength)],
           ],
@@ -82,7 +82,7 @@ export class CreateCourseComponent implements OnInit {
           ],
         }),
         this.fb.group({
-          text: [
+          title: [
             '',
             [Validators.required, Validators.maxLength(this.maxTitleLength)],
           ],
@@ -93,7 +93,7 @@ export class CreateCourseComponent implements OnInit {
           ],
         }),
         this.fb.group({
-          text: [
+          title: [
             '',
             [Validators.required, Validators.maxLength(this.maxTitleLength)],
           ],
