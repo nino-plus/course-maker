@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { Observable } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { User } from '../interfaces/user';
 
 @Injectable({
@@ -31,5 +32,20 @@ export class UserService {
     return this.db.doc(`users/${uid}`).update({
       avatarURL,
     });
+  }
+
+  getCompleteUsers(courseId: string): Observable<User[]> {
+    return this.db
+      .collection(`courses/${courseId}/completedUserIds`)
+      .valueChanges()
+      .pipe(
+        switchMap((users) => {
+          return combineLatest(
+            users.map((user: { userId: string }) => {
+              return this.db.doc<User>(`users/${user.userId}`).valueChanges();
+            })
+          );
+        })
+      );
   }
 }

@@ -14,6 +14,7 @@ export class JudgeQuestionDialogComponent implements OnInit {
       selected: string;
       answer: string;
       hint: string;
+      isCompleted: boolean;
     }
   ) {}
 
