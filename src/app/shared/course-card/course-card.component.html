@@ -1,18 +1,14 @@
 <div class="card">
-  <a
-    [routerLink]="['/play-course/']"
-    [queryParams]="{ courseId: courseWithUser.courseId, questionNumber: 1 }"
-  >
-    <img
-      [src]="
-        courseWithUser.thumbnailURL
-          ? courseWithUser.thumbnailURL
-          : 'assets/images/example.png'
-      "
-      class="card__image"
-      alt=""
-    />
-  </a>
+  <img
+    [src]="
+      courseWithUser.thumbnailURL
+        ? courseWithUser.thumbnailURL
+        : 'assets/images/example.png'
+    "
+    class="card__image"
+    alt=""
+    (click)="countUpPlayed(courseWithUser.courseId)"
+  />
 
   <div class="card__contents">
     <a [routerLink]="['/user/', courseWithUser.creatorId]">
@@ -20,14 +16,10 @@
     /></a>
 
     <div class="card__items">
-      <a
-        [routerLink]="['/play-course/']"
-        [queryParams]="{ courseId: courseWithUser.courseId, questionNumber: 1 }"
-      >
-        <p class="card__title">
-          {{ courseWithUser.title ? courseWithUser.title : 'タイトル' }}
-        </p>
-      </a>
+      <p class="card__title" (click)="countUpPlayed(courseWithUser.courseId)">
+        {{ courseWithUser.title ? courseWithUser.title : 'タイトル' }}
+      </p>
+
       <span class="card__date">
         作成日:{{
           courseWithUser.createdAt

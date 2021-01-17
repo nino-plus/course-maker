@@ -93,6 +93,11 @@ export class CourseService {
     return this.db.doc(`courses/${courseId}`).set(data, { merge: true });
   }
 
+  countUpPlayed(courseId: string): Promise<void> {
+    const callable = this.fns.httpsCallable('countUpPlayed');
+    return callable(courseId).toPromise();
+  }
+
   countUpCompleted(courseId: string): Promise<void> {
     const callable = this.fns.httpsCallable('countUpCompletedOnCall');
     return callable(courseId).toPromise();
