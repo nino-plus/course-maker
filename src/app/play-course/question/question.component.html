@@ -25,7 +25,16 @@
           </form>
         </div>
         <div class="question__maparea">
-          <google-map width="100%" height="456px"></google-map>
+          <google-map
+            [center]="question.mapPosition"
+            width="100%"
+            height="456px"
+          >
+            <map-marker
+              *ngIf="question.mapPosition"
+              [position]="question.mapPosition"
+            ></map-marker>
+          </google-map>
         </div>
       </div>
 
