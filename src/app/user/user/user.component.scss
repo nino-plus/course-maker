@@ -1,3 +1,57 @@
+@import 'mixins';
+@import 'variables';
+
+.course {
+  padding-top: 24px;
+  &__title {
+    position: relative;
+    padding: 0.5em 1em;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-align: center;
+    border-top: 4px solid $color-text;
+    border-bottom: 4px solid $color-text;
+    @include pc {
+      font-size: 32px;
+    }
+    &::before {
+      content: '';
+      left: 50%;
+      transform: translateX(-50%);
+      position: absolute;
+      bottom: -24px;
+      border: 12px solid transparent;
+      border-top: 12px solid #fff;
+      z-index: 2;
+    }
+    &::after {
+      content: '';
+      left: 50%;
+      transform: translateX(-50%);
+      position: absolute;
+      bottom: -33px;
+      border: 16px solid transparent;
+      border-top: 16px solid $color-text;
+      z-index: 1;
+    }
+  }
+  &__wrapper {
+    max-width: 1024px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 24px;
+    padding: 40px 0;
+  }
+  &__nothing {
+    margin: 100px 0;
+    text-align: center;
+  }
+  &__text {
+    font-size: 24px;
+  }
+}
 button {
   display: block;
   margin: 0 auto;
