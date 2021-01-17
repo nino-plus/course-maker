@@ -7,6 +7,8 @@ import { Question } from 'src/app/interfaces/question';
 import { AuthService } from 'src/app/services/auth.service';
 import { CourseService } from 'src/app/services/course.service';
 import firebase from 'firebase/app';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-course',
@@ -14,6 +16,7 @@ import firebase from 'firebase/app';
   styleUrls: ['./create-course.component.scss'],
 })
 export class CreateCourseComponent implements OnInit {
+  readonly isCreatePage = true;
   private currentPosition: google.maps.LatLngLiteral;
   center: google.maps.LatLngLiteral = {
     lat: 35.681162843979585,
@@ -25,6 +28,7 @@ export class CreateCourseComponent implements OnInit {
   form: FormGroup;
 
   imageFiles: string[] = new Array(3).fill(null);
+  thumbnail: string;
 
   isEditable = false;
   maxTitleLength = 30;
@@ -38,7 +42,9 @@ export class CreateCourseComponent implements OnInit {
     private courseService: CourseService,
     private db: AngularFirestore,
     private authService: AuthService,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -65,19 +71,37 @@ export class CreateCourseComponent implements OnInit {
       ],
       questions: this.fb.array([
         this.fb.group({
-          text: [''],
-          hint: [''],
-          answer: [''],
+          text: [
+            '',
+            [Validators.required, Validators.maxLength(this.maxTitleLength)],
+          ],
+          hint: ['', [Validators.maxLength(this.maxTitleLength)]],
+          answer: [
+            '',
+            [Validators.required, Validators.maxLength(this.maxTitleLength)],
+          ],
         }),
         this.fb.group({
-          text: [''],
-          hint: [''],
-          answer: [''],
+          text: [
+            '',
+            [Validators.required, Validators.maxLength(this.maxTitleLength)],
+          ],
+          hint: ['', [Validators.maxLength(this.maxTitleLength)]],
+          answer: [
+            '',
+            [Validators.required, Validators.maxLength(this.maxTitleLength)],
+          ],
         }),
         this.fb.group({
-          text: [''],
-          hint: [''],
-          answer: [''],
+          text: [
+            '',
+            [Validators.required, Validators.maxLength(this.maxTitleLength)],
+          ],
+          hint: ['', [Validators.maxLength(this.maxTitleLength)]],
+          answer: [
+            '',
+            [Validators.required, Validators.maxLength(this.maxTitleLength)],
+          ],
         }),
       ]),
     });
@@ -87,34 +111,75 @@ export class CreateCourseComponent implements OnInit {
     this.imageFiles[i] = image;
   }
 
+  thumbnailImage(image: string): void {
+    this.thumbnail = image;
+  }
+
   setMarker(event: google.maps.MouseEvent, i: number) {
     this.markerPositions[i] = event.latLng.toJSON();
   }
 
-  async setImageToStorage(
+  async setQuestionImageToStorage(
     couseId: string,
     file: string,
     i: number
   ): Promise<string> {
     const result = await this.storage
-      .ref(`courses/${couseId}/question${i}`)
+      .ref(`courses/${couseId}/question${i + 1}`)
       .putString(file, 'data_url');
     return result.ref.getDownloadURL();
   }
 
+  async setThumbnailImageToStorage(
+    couseId: string,
+    file: string
+  ): Promise<string> {
+    const result = await this.storage
+      .ref(`courses/${couseId}/thumbnail`)
+      .putString(file, 'data_url');
+    return result.ref.getDownloadURL();
+  }
+
+  async setQuestionImagesToStorage(
+    id: string,
+    files: string[]
+  ): Promise<string[]> {
+    const tasks = await Promise.all(
+      files.map((file, index) => {
+        if (file !== null) {
+          const ref = this.storage.ref(`courses/${id}/question-${index + 1}`);
+          return ref.putString(file, 'data_url');
+        }
+      })
+    );
+    const imageUrls = [];
+    for (const task of tasks) {
+      if (task) {
+        imageUrls.push(await task.ref.getDownloadURL());
+      } else {
+        imageUrls.push(null);
+      }
+    }
+    return imageUrls;
+  }
+
   async submit() {
     const courseId = this.db.createId();
-    const url = this.imageFiles.map((image, i) => {
-      if (image) {
-        return this.setImageToStorage(courseId, image, i);
-      } else {
-        return null;
-      }
-    });
+    const url = await this.setQuestionImagesToStorage(
+      courseId,
+      this.imageFiles
+    );
+    let thumbnailURL = '';
+    if (this.thumbnail) {
+      thumbnailURL = await this.setThumbnailImageToStorage(
+        courseId,
+        this.thumbnail
+      );
+    }
     const questions: Question[] = this.questionForms.value.map(
       (question: Omit<Question, 'imageURL' | 'mapPosition'>, i: number) => {
         question['mapPosition'] = this.markerPositions[i];
-        question['imageURL'] = this.imageFiles[i];
+        question['imageURL'] = url[i];
         return question;
       }
     );
@@ -122,6 +187,7 @@ export class CreateCourseComponent implements OnInit {
     const newValue: Course = {
       courseId,
       creatorId: this.authService.uid,
+      thumbnailURL,
       createdAt: firebase.firestore.Timestamp.now(),
       title: this.form.get('title').value,
       questions,
@@ -129,6 +195,9 @@ export class CreateCourseComponent implements OnInit {
       clearUserCount: 0,
     };
 
-    this.courseService.createCourse(newValue);
+    this.courseService.createCourse(newValue).then(() => {
+      this.snackBar.open('コースを作成しました！');
+      this.router.navigate(['/']);
+    });
   }
 }

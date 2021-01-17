@@ -13,12 +13,7 @@ import { Question } from '../interfaces/question';
   providedIn: 'root',
 })
 export class CourseService {
-  constructor(
-    private db: AngularFirestore,
-    private authService: AuthService,
-    private storage: AngularFireStorage,
-    private userService: UserService
-  ) {}
+  constructor(private db: AngularFirestore, private userService: UserService) {}
 
   async createCourse(course: Course) {
     await this.db.doc<Course>(`courses/${course.courseId}`).set(course);
