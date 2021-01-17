@@ -3,16 +3,18 @@
 
 .image {
   width: 180px;
-  margin: 2em auto 0;
+  margin: 1em auto 0;
   @include pc {
-    width: 240px;
+    width: 200px;
   }
 }
 
 .base-title {
+  padding-top: 24px;
   color: $color-main-deep;
   font-size: 24px;
   font-weight: 700;
+  line-height: 1.5;
   letter-spacing: 0.05em;
   text-align: center;
   text-shadow: 1px 1px 0px $color-text, -1px 1px 0px $color-text,
@@ -25,4 +27,21 @@
 
 h2 {
   font-size: 16px;
+}
+
+.hint-data {
+  margin: 2em 0 0;
+  &__dt {
+    background-color: #fff;
+  }
+  &__dd {
+    border: 2px solid $color-main-deep;
+    border-radius: 4px;
+  }
+}
+
+.buttons {
+  text-align: center;
+  width: 100%;
+  padding: 24px 0;
 }

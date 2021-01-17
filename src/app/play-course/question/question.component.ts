@@ -60,7 +60,7 @@ export class QuestionComponent implements OnInit {
   openJudgeDialog(question: Question): void {
     this.dialog
       .open(JudgeQuestionDialogComponent, {
-        width: '800px',
+        width: '500px',
         restoreFocus: false,
         autoFocus: false,
         data: {
