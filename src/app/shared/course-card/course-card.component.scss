@@ -22,7 +22,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 24px 16px;
+    padding: 24px 24px;
     margin: auto 0;
     background: #face01;
   }
@@ -38,7 +38,7 @@
   }
   &__title {
     margin: 0;
-    margin-bottom: 8px;
+    margin-bottom: 16px;
     word-break: break-all;
     overflow: hidden;
     font-size: 14px;

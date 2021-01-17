@@ -1,10 +1,17 @@
 <div class="card">
   <a [routerLink]="['/play-course/', courseWithUser.courseId]">
-    <img class="card__image" src="assets/images/example.png" alt="コース画像" />
+    <img
+      class="card__image"
+      src="courses.thumbnailUrl"
+      onerror="this.src='assets/images/example.png';"
+      alt="コース画像"
+    />
   </a>
 
   <div class="card__contents">
-    <img class="card__avatar" [src]="courseWithUser.user.avatarUrl" alt="" />
+    <a [routerLink]="['/user/', courseWithUser.creatorId]">
+      <img class="card__avatar" [src]="courseWithUser.user.avatarUrl" alt=""
+    /></a>
 
     <div class="card__items">
       <a [routerLink]="['/play-course/', courseWithUser.courseId]">
