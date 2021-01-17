@@ -10,7 +10,7 @@ const routes: Routes = [
     component: PlayCourseComponent,
   },
   {
-    path: 'result',
+    path: 'result/:id',
     component: ResultComponent,
   },
 ];

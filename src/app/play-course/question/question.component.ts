@@ -112,7 +112,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
             );
           }
           countUpCompleted.then(() => {
-            this.router.navigate(['/play-course/result']);
+            this.router.navigate(['/play-course/result', this.courseId]);
           });
         }
       });

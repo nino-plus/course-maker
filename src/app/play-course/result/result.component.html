@@ -5,15 +5,9 @@
   </h1>
   <h2>このコースをクリアしたユーザー</h2>
   <ul>
-    <li>ffafafafafafafafaf</li>
-    <li>ffafafafafafafafaf</li>
-    <li>ffafafafafafafafaf</li>
-    <li>ffafafafafafafafaf</li>
-    <li>ffafafafafafafafaf</li>
-    <li>ffafafafafafafafaf</li>
-    <li>ffafafafafafafafaf</li>
-    <li>ffafafafafafafafaf</li>
-    <li>ffafafafafafafafaf</li>
+    <ng-container *ngFor="let user of completeUses$ | async">
+      <li>{{ user.displayName }}</li>
+    </ng-container>
   </ul>
   <button mat-button>twitterでシェアする</button>
   <button routerLink="/" mat-raised-button color="primary">
