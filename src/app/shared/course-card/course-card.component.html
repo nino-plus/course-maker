@@ -1,1 +1,67 @@
-<p>course-card works!</p>
+<div class="card">
+  <a
+    [routerLink]="['/play-course/']"
+    [queryParams]="{ courseId: courseWithUser.courseId, questionNumber: 1 }"
+  >
+    <img
+      [src]="
+        courseWithUser.thumbnailURL
+          ? courseWithUser.thumbnailURL
+          : 'assets/images/example.png'
+      "
+      class="card__image"
+      alt=""
+    />
+  </a>
+
+  <div class="card__contents">
+    <a [routerLink]="['/user/', courseWithUser.creatorId]">
+      <img class="card__avatar" [src]="courseWithUser.user.avatarUrl" alt=""
+    /></a>
+
+    <div class="card__items">
+      <a
+        [routerLink]="['/play-course/']"
+        [queryParams]="{ courseId: courseWithUser.courseId, questionNumber: 1 }"
+      >
+        <p class="card__title">
+          {{ courseWithUser.title ? courseWithUser.title : 'タイトル' }}
+        </p>
+      </a>
+      <span class="card__date">
+        作成日:{{
+          courseWithUser.createdAt
+            ? (courseWithUser.createdAt.toDate() | date: 'yyyy/MM/dd')
+            : '2020/12/05'
+        }}</span
+      >
+
+      <div class="card__people">
+        <p class="card__cleared">
+          <img src="assets/images/cleared_icon.svg" alt="" />
+          {{ courseWithUser.clearUserCount }}
+        </p>
+        <p class="card__played">
+          <img src="assets/images/played_icon.svg" alt="" />
+          {{ courseWithUser.playCount }}
+        </p>
+      </div>
+    </div>
+
+    <button
+      [matMenuTriggerFor]="menuRef"
+      class="card__menu-btn"
+      mat-icon-button
+      *ngIf="authService.uid === courseWithUser.creatorId"
+    >
+      <mat-icon class="material-icons"> more_vert </mat-icon>
+    </button>
+    <mat-menu #menuRef="matMenu">
+      <!-- ここのボタンにdeleteCourse()のクリックを設定する -->
+      <button mat-menu-item>
+        <mat-icon>delete</mat-icon>
+        <span>削除</span>
+      </button>
+    </mat-menu>
+  </div>
+</div>

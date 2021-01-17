@@ -19,3 +19,19 @@
 h1 {
   color: rgba(black, 0.8);
 }
+
+@media screen and (max-width: 480px) {
+  /*　画面サイズが480pxからはここを読み込む　*/
+  .home-wrapper {
+    display: block;
+  }
+  .title {
+    width: 360px;
+    display: flex;
+    justify-content: center;
+    margin: 16px auto;
+  }
+  h1 {
+    font-size: 20px;
+  }
+}

@@ -25,7 +25,6 @@ export class QuestionComponent implements OnInit, OnDestroy {
     switchMap((params) => {
       if (params) {
         this.courseId = params.get('courseId');
-        this.courseId = 'QzIz2Q0UlposxdXm3XD6';
         return this.courseService.getCourse(this.courseId).pipe(take(1));
       } else {
         return of(null);
@@ -41,7 +40,6 @@ export class QuestionComponent implements OnInit, OnDestroy {
       if (params) {
         this.courseId = params.get('courseId');
         this.questionNumber = parseInt(params.get('questionNumber'), 10);
-        this.courseId = 'QzIz2Q0UlposxdXm3XD6';
         return this.courseService
           .getQuestion(this.courseId, this.questionNumber)
           .pipe(take(1));
