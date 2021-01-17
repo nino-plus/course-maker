@@ -47,13 +47,15 @@
                   <input
                     matInput
                     autocomplete="off"
-                    formControlName="text"
+                    formControlName="title"
                     placeholder="？"
                     required
                   />
                   <mat-error
                     *ngIf="
-                      questionForms.controls[i].get('text').hasError('required')
+                      questionForms.controls[i]
+                        .get('title')
+                        .hasError('required')
                     "
                     >必須入力です</mat-error
                   >
