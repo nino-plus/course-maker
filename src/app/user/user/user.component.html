@@ -57,9 +57,21 @@
   </div>
 
   <section class="course">
-    <div class="course__title">コースカード一覧</div>
-    <div *ngFor="let courseWithUser of coursesWithUser$ | async">
-      <app-course-card [courseWithUser]="courseWithUser"></app-course-card>
+    <h2 class="course__title">作ったコース一覧</h2>
+    <div *ngIf="coursesWithUser$ | async as courseWithUser">
+      <div
+        *ngIf="courseWithUser.length !== 0; else showNothing"
+        class="course__wrapper"
+      >
+        <ng-container *ngFor="let course of courseWithUser">
+          <app-course-card [courseWithUser]="course"></app-course-card>
+        </ng-container>
+      </div>
     </div>
+    <ng-template #showNothing>
+      <div class="course__nothing">
+        <p class="course__text">まだコースが作成されていません</p>
+      </div>
+    </ng-template>
   </section>
 </div>

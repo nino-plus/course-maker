@@ -36,6 +36,21 @@
       z-index: 1;
     }
   }
+  &__wrapper {
+    max-width: 1024px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 24px;
+    padding: 40px 0;
+  }
+  &__nothing {
+    margin: 100px 0;
+    text-align: center;
+  }
+  &__text {
+    font-size: 24px;
+  }
 }
 button {
   display: block;
