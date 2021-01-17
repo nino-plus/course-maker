@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { switchMap, take, tap } from 'rxjs/operators';
+import { Course } from 'src/app/interfaces/course';
 import { Question } from 'src/app/interfaces/question';
 import { CourseService } from 'src/app/services/course.service';
 import { JudgeQuestionDialogComponent } from '../judge-question-dialog/judge-question-dialog.component';
@@ -16,6 +17,17 @@ import { JudgeQuestionDialogComponent } from '../judge-question-dialog/judge-que
 export class QuestionComponent implements OnInit {
   @Input() isCompleted: boolean;
   courseId: string;
+  course$: Observable<Course> = this.route.queryParamMap.pipe(
+    switchMap((params) => {
+      if (params) {
+        this.courseId = params.get('courseId');
+        this.courseId = 'QzIz2Q0UlposxdXm3XD6';
+        return this.courseService.getCourse(this.courseId).pipe(take(1));
+      } else {
+        return of(null);
+      }
+    })
+  );
   questionNumber: number;
   question$: Observable<Question> = this.route.queryParamMap.pipe(
     tap(() => {
@@ -49,7 +61,7 @@ export class QuestionComponent implements OnInit {
   openJudgeDialog(question: Question): void {
     this.dialog
       .open(JudgeQuestionDialogComponent, {
-        width: '800px',
+        width: '500px',
         restoreFocus: false,
         autoFocus: false,
         data: {

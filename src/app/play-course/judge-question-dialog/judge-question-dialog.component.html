@@ -1,31 +1,29 @@
 <h1 class="base-title" matDialogTitle>
-  {{ isCrear ? '正解です！おめでとうございます！！' : '残念！不正解です。' }}
+  <ng-container *ngIf="isCrear; else mistake"
+    >正解です！<br />おめでとうございます！！</ng-container
+  >
+  <ng-template #mistake>残念！不正解です。</ng-template>
 </h1>
 
 <mat-dialog-content>
   <div class="image">
     <img
       src="/assets/images/{{ isCrear ? 'correct' : 'incorrect' }}.png"
-      alt="問題判定の画像"
+      alt=""
     />
   </div>
-  <ng-container *ngIf="!isCrear">
-    <h2>ヒント</h2>
-    <p>
-      {{ data.hint }}
-    </p>
-  </ng-container>
+  <dl class="hint-data" *ngIf="!isCrear">
+    <dt class="hint-data__dt">ヒント</dt>
+    <dd class="hint-data__dd">{{ data.hint }}</dd>
+  </dl>
 </mat-dialog-content>
 
 <mat-dialog-actions>
   <div class="buttons">
-    <button mat-button matDialogClose>閉じる</button>
-    <button
-      *ngIf="isCrear"
-      mat-raised-button
-      color="primary"
-      [matDialogClose]="true"
-    >
+    <button class="btn-original btn-original--white" matDialogClose>
+      閉じる
+    </button>
+    <button *ngIf="isCrear" class="btn-original" [matDialogClose]="true">
       {{ data.isCompleted ? '結果画面に進む' : '次の問題に進む' }}
     </button>
   </div>
