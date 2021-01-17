@@ -1,16 +1,36 @@
-<div class="container">
-  <h1>
-    おめでとうございます！！<br />
-    テスト太郎さんの『テスト』コースをクリアしました！！
-  </h1>
-  <h2>このコースをクリアしたユーザー</h2>
-  <ul>
-    <ng-container *ngFor="let user of completeUses$ | async">
-      <li>{{ user.displayName }}</li>
-    </ng-container>
-  </ul>
-  <button mat-button>twitterでシェアする</button>
-  <button routerLink="/" mat-raised-button color="primary">
-    ホーム画面へ戻る
-  </button>
+<div class="result" *ngIf="course$ | async as course">
+  <div class="container">
+    <h1 class="result__title">
+      おめでとうございます！！<br />
+      テスト太郎さんの<br />
+      「{{ course.title }}」をクリアしました！！
+    </h1>
+    <div class="result__img">
+      <img src="assets/images/chasuke03.png" alt="" />
+    </div>
+    <dl class="result__data">
+      <dt>このコースをクリアしたユーザー</dt>
+      <dd>
+        <ul>
+          <ng-container *ngFor="let user of completeUses$ | async">
+            <li>
+              <a routerLink="/user/{{ user.uid }}" class="">
+                <img [src]="user.avatarUrl" alt="" />
+              </a>
+            </li>
+          </ng-container>
+        </ul>
+      </dd>
+    </dl>
+    <div class="result__actions">
+      <button class="btn-original">twitterでシェアする</button>
+      <button
+        class="btn-original btn-original--white"
+        routerLink="/"
+        color="primary"
+      >
+        ホーム画面へ戻る
+      </button>
+    </div>
+  </div>
 </div>

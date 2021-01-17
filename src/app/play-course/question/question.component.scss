@@ -44,6 +44,10 @@ mat-form-field {
     margin: 0 0 1em;
     line-height: 1.5;
   }
+  &__img {
+    margin: 1em 0;
+    max-width: 100%;
+  }
   &__action {
     margin-top: 1em;
     text-align: center;

@@ -9,6 +9,12 @@
       <div class="question__contents">
         <div class="question__textarea">
           <h2 class="question__title">{{ question.title }}</h2>
+          <img
+            *ngIf="question.imageURL"
+            [src]="question.imageURL"
+            alt=""
+            class="question__img"
+          />
           <form (ngSubmit)="openJudgeDialog(question)">
             <mat-form-field appearance="outline">
               <mat-label>答えを入力</mat-label>
