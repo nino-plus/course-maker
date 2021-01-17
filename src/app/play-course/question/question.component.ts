@@ -106,12 +106,10 @@ export class QuestionComponent implements OnInit, OnDestroy {
               this.courseId,
               this.user.uid
             );
-            console.log('user');
           } else {
             countUpCompleted = this.courseService.countUpCompleted(
               this.courseId
             );
-            console.log('count');
           }
           countUpCompleted.then(() => {
             this.router.navigate(['/play-course/result']);
