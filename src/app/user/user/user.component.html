@@ -1,12 +1,16 @@
 <div class="container">
   <div class="profile">
-    <ng-container *ngIf="$user | async as user">
+    <ng-container *ngIf="creator$ | async as creator">
+      <h2 class="course__title">ユーザー</h2>
       <section class="avatar-section">
-        <h3>アバターの変更</h3>
-        <label class="avatar-wrapper">
+        <label
+          class="avatar-wrapper"
+          [class.avatar-wrapper--nouser]="!isMyAccount"
+        >
+          <p>アバター画像</p>
           <img
             class="avatar"
-            [src]="imageFile ? imageFile : user.avatarUrl"
+            [src]="imageFile ? imageFile : creator.avatarUrl"
             alt=""
             (click)="crop.input.nativeElement.click()"
           />
@@ -20,6 +24,7 @@
           (image)="onCroppedImage($event)"
         ></deer-crop-trigger>
         <button
+          *ngIf="isMyAccount"
           mat-raised-button
           color="primary"
           [disabled]="!imageFile"
@@ -29,29 +34,30 @@
         </button>
       </section>
       <section class="name-section">
-        <h3>名前の変更</h3>
-        <p>現在の名前 {{ user.displayName }}</p>
-        <mat-form-field>
-          <input
-            type="text"
-            matInput
-            autocomplete="off"
-            placeholder="新しい名前"
-            [formControl]="nameForm"
-          />
-          <mat-error *ngIf="nameForm.hasError('maxlength')"
-            >30文字以内にしてください</mat-error
+        <p>名前： {{ creator.displayName }}</p>
+        <div *ngIf="isMyAccount">
+          <mat-form-field>
+            <input
+              type="text"
+              matInput
+              autocomplete="off"
+              placeholder="新しい名前"
+              [formControl]="nameForm"
+            />
+            <mat-error *ngIf="nameForm.hasError('maxlength')"
+              >30文字以内にしてください</mat-error
+            >
+          </mat-form-field>
+          <button
+            mat-flat-button
+            color="primary"
+            [disabled]="nameForm.pristine"
+            (click)="updateUserName()"
+            class="button"
           >
-        </mat-form-field>
-        <button
-          mat-flat-button
-          color="primary"
-          [disabled]="nameForm.pristine"
-          (click)="updateUserName()"
-          class="button"
-        >
-          更新する
-        </button>
+            更新する
+          </button>
+        </div>
       </section>
     </ng-container>
   </div>

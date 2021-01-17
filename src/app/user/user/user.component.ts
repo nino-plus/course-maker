@@ -32,7 +32,15 @@ export class UserComponent implements OnInit {
       }
     })
   );
-
+  creator$: Observable<User> = this.route.paramMap.pipe(
+    switchMap((params) => {
+      if (params) {
+        return this.userService.getUser(params.get('creatorId'));
+      } else {
+        return of(null);
+      }
+    })
+  );
   constructor(
     private userService: UserService,
     private snackBar: MatSnackBar,
@@ -42,7 +50,6 @@ export class UserComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isMyAccount = false;
     this.route.paramMap.subscribe((params) => {
       if (params.get('creatorId') === this.authService.uid) {
         this.isMyAccount = true;
