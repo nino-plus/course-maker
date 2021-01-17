@@ -1,1 +1,6 @@
-<p>user works!</p>
+<section class="course">
+  <div class="course__title">コースカード一覧</div>
+  <div *ngFor="let courseWithUser of coursesWithUser$ | async">
+    <app-course-card [courseWithUser]="courseWithUser"></app-course-card>
+  </div>
+</section>

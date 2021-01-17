@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { Course } from 'src/app/interfaces/course';
+import { CourseWithUser } from 'src/app/interfaces/course';
 import { AuthService } from 'src/app/services/auth.service';
 import { CourseService } from 'src/app/services/course.service';
 
@@ -14,10 +14,10 @@ import { CourseService } from 'src/app/services/course.service';
 export class UserComponent implements OnInit {
   isMyAccount: boolean;
 
-  courses$: Observable<Course[]> = this.route.paramMap.pipe(
+  coursesWithUser$: Observable<CourseWithUser[]> = this.route.paramMap.pipe(
     switchMap((params) => {
       if (params) {
-        return this.courseService.getCoursesByCreatorId(
+        return this.courseService.getCoursesWithUserByCreatorId(
           params.get('creatorId')
         );
       } else {
