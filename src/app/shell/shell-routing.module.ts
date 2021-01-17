@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { FormGuard } from '../guards/form.guard';
 import { ShellComponent } from './shell/shell.component';
 
 const routes: Routes = [

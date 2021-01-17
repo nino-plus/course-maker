@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
@@ -18,6 +18,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class CreateCourseComponent implements OnInit {
   readonly isCreatePage = true;
   private currentPosition: google.maps.LatLngLiteral;
+
   center: google.maps.LatLngLiteral = {
     lat: 35.681162843979585,
     lng: 139.76662332460555,
@@ -32,6 +33,8 @@ export class CreateCourseComponent implements OnInit {
 
   isEditable = false;
   maxTitleLength = 100;
+
+  isComplete: boolean;
 
   get questionForms() {
     return this.form.get('questions') as FormArray;
@@ -195,9 +198,19 @@ export class CreateCourseComponent implements OnInit {
       completedUserCount: 0,
     };
 
+    this.isComplete = true;
+
     this.courseService.createCourse(newValue).then(() => {
       this.snackBar.open('コースを作成しました！');
       this.router.navigate(['/']);
     });
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any) {
+    if (this.form.dirty) {
+      $event.preventDefault();
+      $event.returnValue = '';
+    }
   }
 }
