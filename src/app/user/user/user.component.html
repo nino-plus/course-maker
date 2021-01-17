@@ -1,1 +1,58 @@
-<p>user works!</p>
+<div class="container">
+  <div class="profile">
+    <ng-container *ngIf="$user | async as user">
+      <section class="avatar-section">
+        <h3>アバターの変更</h3>
+        <label class="avatar-wrapper">
+          <img
+            class="avatar"
+            [src]="imageFile ? imageFile : user.avatarUrl"
+            alt=""
+            (click)="crop.input.nativeElement.click()"
+          />
+        </label>
+        <deer-crop-trigger
+          class="crop"
+          #crop
+          [options]="{
+            aspectRatio: 1 / 1
+          }"
+          (image)="onCroppedImage($event)"
+        ></deer-crop-trigger>
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!imageFile"
+          (click)="updateUserAvatar()"
+        >
+          更新する
+        </button>
+      </section>
+      <section class="name-section">
+        <h3>名前の変更</h3>
+        <p>現在の名前 {{ user.displayName }}</p>
+        <mat-form-field>
+          <input
+            type="text"
+            matInput
+            autocomplete="off"
+            placeholder="新しい名前"
+            [formControl]="nameForm"
+          />
+          <mat-error *ngIf="nameForm.hasError('maxlength')"
+            >30文字以内にしてください</mat-error
+          >
+        </mat-form-field>
+        <button
+          mat-flat-button
+          color="primary"
+          [disabled]="nameForm.pristine"
+          (click)="updateUserName()"
+          class="button"
+        >
+          更新する
+        </button>
+      </section>
+    </ng-container>
+  </div>
+</div>
