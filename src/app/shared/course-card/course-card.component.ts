@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
 import { User } from 'src/app/interfaces/user';
+import { Course } from 'src/app/interfaces/course';
 import { AuthService } from 'src/app/services/auth.service';
 import { CourseService } from 'src/app/services/course.service';
 import { UserService } from 'src/app/services/user.service';
@@ -15,15 +15,21 @@ import { CourseWithUser } from 'src/app/interfaces/course';
 })
 export class CourseCardComponent implements OnInit {
   @Input() courseWithUser: CourseWithUser;
+  @Input() course: Course;
 
   user$: Observable<User> = this.authService.user$;
-  uid: string;
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private userService: UserService,
-    private courseService: CourseService // private snackBar: MatSnackBar
+    private courseService: CourseService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {}
+  deleteArticle(): void {
+    this.courseService.deleteCourse(this.course.courseId).then(() => {
+      this.snackBar.open('削除しました！');
+    });
+  }
 }
