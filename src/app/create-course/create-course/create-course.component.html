@@ -134,23 +134,24 @@
 
       <mat-step>
         <ng-template matStepLabel>完了</ng-template>
-        <h2>おつかれさま！</h2>
-        <img src="assets/images/chasuke05.png" alt="" />
-
-        <div class="btn__wrapper btn__wrapper--final">
-          <button class="create__btn" (click)="stepper.previous()">
-            もどる
-          </button>
-          <button class="create__btn" (click)="stepper.reset()">
-            つくりなおす
-          </button>
-          <button
-            class="create__btn"
-            [disabled]="form.invalid || markerPositions.includes(null)"
-            (click)="submit()"
-          >
-            作成
-          </button>
+        <div class="final">
+          <h2>おつかれさま！</h2>
+          <div class="btn__wrapper btn__wrapper--final">
+            <button class="create__btn" (click)="stepper.previous()">
+              もどる
+            </button>
+            <button class="create__btn" (click)="stepper.reset()">
+              つくりなおす
+            </button>
+            <button
+              class="create__btn"
+              [disabled]="form.invalid || markerPositions.includes(null)"
+              (click)="submit()"
+            >
+              作成
+            </button>
+          </div>
+          <img src="assets/images/chasuke05.png" alt="" />
         </div>
       </mat-step>
     </mat-horizontal-stepper>
