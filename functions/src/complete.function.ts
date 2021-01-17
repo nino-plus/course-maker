@@ -9,15 +9,35 @@ export const countUpCompleted = functions
   .firestore.document('courses/{courseId}/completedUserIds/{userId}')
   .onCreate(async (snap, context) => {
     const eventId = context.eventId;
-    return shouldEventRun(eventId).then((should: boolean) => {
-      if (should) {
-        db.doc(`courses/${context.params.courseId}`).update(
-          'completedUserCount',
-          admin.firestore.FieldValue.increment(1)
-        );
-        return markEventTried(eventId);
-      } else {
-        return;
-      }
-    });
+    return shouldEventRun(eventId)
+      .catch((error) => {
+        return error;
+      })
+      .then((should: boolean) => {
+        if (should) {
+          db.doc(`courses/${context.params.courseId}`)
+            .update(
+              'completedUserCount',
+              admin.firestore.FieldValue.increment(1)
+            )
+            .catch((error) => {
+              return error;
+            });
+          return markEventTried(eventId);
+        } else {
+          return;
+        }
+      });
+  });
+
+export const countUpCompletedOnCall = functions
+  .region('asia-northeast1')
+  .https.onCall((courseId, context) => {
+    if (courseId) {
+      return db
+        .doc(`courses/${courseId}`)
+        .update('completedUserCount', admin.firestore.FieldValue.increment(1));
+    } else {
+      return;
+    }
   });

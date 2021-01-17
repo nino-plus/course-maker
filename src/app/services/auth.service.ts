@@ -29,13 +29,13 @@ export class AuthService {
     private router: Router
   ) {}
 
-  login() {
+  login(): void {
     const provider = new firebase.auth.TwitterAuthProvider();
     provider.setCustomParameters({ prompt: 'select_account' });
     this.afAuth.signInWithPopup(provider);
   }
 
-  logout() {
+  logout(): void {
     this.afAuth.signOut().then(() => this.router.navigateByUrl('/welcome'));
   }
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireFunctions } from '@angular/fire/functions';
 import { combineLatest, Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Course, CourseWithUser } from '../interfaces/course';
@@ -11,7 +12,11 @@ import { UserService } from './user.service';
   providedIn: 'root',
 })
 export class CourseService {
-  constructor(private db: AngularFirestore, private userService: UserService) {}
+  constructor(
+    private db: AngularFirestore,
+    private userService: UserService,
+    private fns: AngularFireFunctions
+  ) {}
 
   createCourse(course: Course): Promise<void> {
     return this.db.doc<Course>(`courses/${course.courseId}`).set(course);
@@ -66,5 +71,14 @@ export class CourseService {
     return this.getCourse(courseId).pipe(
       map((course) => course.questions[--questionNumber])
     );
+  }
+
+  updateCourse(courseId: string, data: Partial<Course>): Promise<void> {
+    return this.db.doc(`courses/${courseId}`).set(data, { merge: true });
+  }
+
+  countUpCompleted(courseId: string): Promise<void> {
+    const callable = this.fns.httpsCallable('countUpCompletedOnCall');
+    return callable(courseId).toPromise();
   }
 }
