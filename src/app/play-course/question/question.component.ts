@@ -61,7 +61,7 @@ export class QuestionComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((result) => {
-        if (result) {
+        if (result && !this.isCompleted) {
           this.router.navigate(['/play-course'], {
             queryParamsHandling: 'merge',
             queryParams: {
@@ -69,6 +69,9 @@ export class QuestionComponent implements OnInit {
               questionNumber: ++this.questionNumber,
             },
           });
+        } else if (result && this.isCompleted) {
+          console.log('fsafsda');
+          this.router.navigate(['/play-course/result']);
         }
       });
   }
