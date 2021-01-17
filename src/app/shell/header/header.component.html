@@ -1,36 +1,42 @@
 <mat-toolbar class="header">
-  <span><h1 class="header__logo"><a class="header__link" routerLink="/" routerLinkActive="active">CourseMaker</a> </h1></span>
+  <span
+    ><h1 class="header__logo">
+      <a class="header__link" routerLink="/" routerLinkActive="active"
+        >CourseMaker</a
+      >
+    </h1></span
+  >
   <span class="header__spacer"></span>
-  <div class="header__items"  *ngIf="user$ |async as user; else showLogin">
-
-    <button class="header__btn" routerLink="/create" routerLinkActive="active">
+  <div class="header__items" *ngIf="user$ | async as user; else showLogin">
+    <button
+      class="header__btn"
+      routerLink="/create-course"
+      routerLinkActive="active"
+    >
       コースを作成する
     </button>
 
     <img
-    class="header__profileImage"
-    [src]="user.avatarUrl"
-    alt="プロフィール画像"
-    [matMenuTriggerFor]="menu"
-    >
+      class="header__profileImage"
+      [src]="user.avatarUrl"
+      alt="プロフィール画像"
+      [matMenuTriggerFor]="menu"
+    />
 
     <mat-menu #menu="matMenu">
-      <button mat-menu-item routerLink="/user/{{user.uid}}">
-      <mat-icon>settings</mat-icon>
-      <span>設定</span>
-    </button>
-    <button mat-menu-item (click)="logout()">
-      <mat-icon>exit_to_app</mat-icon>
-      <span>ログアウト</span>
-    </button>
+      <button mat-menu-item routerLink="/user/{{ user.uid }}">
+        <mat-icon>settings</mat-icon>
+        <span>設定</span>
+      </button>
+      <button mat-menu-item (click)="authService.logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>ログアウト</span>
+      </button>
     </mat-menu>
   </div>
 
   <ng-template #showLogin>
-    <button
-      (click)="login()"
-      class="header__btn"
-    >
+    <button (click)="authService.login()" class="header__btn">
       ログインする
     </button>
   </ng-template>

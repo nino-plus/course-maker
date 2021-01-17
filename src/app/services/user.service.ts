@@ -8,12 +8,10 @@ import { User } from '../interfaces/user';
   providedIn: 'root',
 })
 export class UserService {
-
   constructor(
     private db: AngularFirestore,
     private storage: AngularFireStorage
-
-  ) { }
+  ) {}
 
   getUser(uid: string): Observable<User> {
     return this.db.doc<User>(`users/${uid}`).valueChanges();

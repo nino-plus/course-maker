@@ -14,6 +14,10 @@ body {
   height: 100%;
 }
 
+.cr-viewport {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
@@ -35,4 +39,8 @@ body {
 
 .cr-viewport {
   box-sizing: border-box;
+}
+img {
+  max-width: 100%;
+  vertical-align: middle;
 }
