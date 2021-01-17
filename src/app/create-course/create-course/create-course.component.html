@@ -9,6 +9,7 @@
             <mat-label>タイトル</mat-label>
             <input
               matInput
+              autocomplete="off"
               formControlName="title"
               placeholder="タイトル"
               required
@@ -42,15 +43,18 @@
               <ng-template matStepLabel>{{ i + 1 }}問目</ng-template>
 
               <div [formGroupName]="i">
-                <mat-form-field>
+                <mat-form-field appearance="outline">
                   <mat-label>問題文</mat-label>
-                  <input
+                  <textarea
+                    matTextareaAutosize
                     matInput
+                    rows="5"
+                    cols="40"
                     autocomplete="off"
                     formControlName="title"
                     placeholder="？"
                     required
-                  />
+                  ></textarea>
                   <mat-error
                     *ngIf="
                       questionForms.controls[i]
