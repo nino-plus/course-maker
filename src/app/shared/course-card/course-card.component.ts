@@ -27,9 +27,4 @@ export class CourseCardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
-  deleteArticle(): void {
-    this.courseService.deleteCourse(this.course.courseId).then(() => {
-      this.snackBar.open('削除しました！');
-    });
-  }
 }
