@@ -70,7 +70,6 @@ export class QuestionComponent implements OnInit {
             },
           });
         } else if (result && this.isCompleted) {
-          console.log('fsafsda');
           this.router.navigate(['/play-course/result']);
         }
       });
