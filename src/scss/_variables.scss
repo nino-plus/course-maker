@@ -2,10 +2,8 @@ $color-main: #facd00;
 $color-main-deep: #fdbb00;
 $color-text: #333333;
 
-$font-default: 'Kosugi Maru', '游ゴシック体', YuGothic, '游ゴシック',
-  'Yu Gothic', 'メイリオ', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans',
-  sans-serif;
 $font-bs: 'Balsamiq Sans', cursive;
 $font-ps: 'Press Start 2P', sans-serif;
-$font-yusei: 'Yusei Magic', sans-serif;
-$font-maru: 'Kosugi Maru', sans-serif;
+$font-maru: 'Kosugi Maru', '游ゴシック体', YuGothic, '游ゴシック', 'Yu Gothic',
+  'メイリオ', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif;
+$font-default: $font-maru;

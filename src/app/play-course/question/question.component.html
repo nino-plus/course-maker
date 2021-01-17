@@ -1,31 +1,40 @@
-<div class="container">
-  <ng-container *ngIf="question$ | async as question">
-    <h1>問題{{ questionNumber }}</h1>
+<div class="question">
+  <div class="container">
+    <ng-container *ngIf="course$ | async as course">
+      <h1 class="course-title">{{ course.title }}</h1>
+    </ng-container>
+    <ng-container *ngIf="question$ | async as question">
+      <p class="question__num">問題 {{ questionNumber }} / 3</p>
 
-    <h2>{{ question.title }}</h2>
+      <div class="question__contents">
+        <div class="question__textarea">
+          <h2 class="question__title">{{ question.title }}</h2>
+          <form (ngSubmit)="openJudgeDialog(question)">
+            <mat-form-field appearance="outline">
+              <mat-label>答えを入力</mat-label>
+              <input [formControl]="answerCtrl" matInput autocomplete="off" />
+            </mat-form-field>
+            <div class="question__action">
+              <button
+                class="question__btn"
+                [disabled]="answerCtrl.pristine || answerCtrl.invalid"
+              >
+                答える
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="question__maparea">
+          <google-map width="100%" height="456px"></google-map>
+        </div>
+      </div>
 
-    <p>地図から答えを導き出そう！</p>
-
-    <google-map height="500px" width="500px"></google-map>
-
-    <form (ngSubmit)="openJudgeDialog(question)">
-      <mat-form-field>
-        <mat-label>答えを入力</mat-label>
-        <input [formControl]="answerCtrl" matInput autocomplete="off" />
-        <mat-hint>ひらがなで入力してください</mat-hint>
-      </mat-form-field>
-      <button
-        mat-raised-button
-        color="primary"
-        [disabled]="answerCtrl.pristine || answerCtrl.invalid"
-      >
-        答える
-      </button>
-    </form>
-
-    <button mat-button routerLink="/">コース選択に戻る</button>
-    <button mat-button [routerLink]="['/course', 'fafafa']">
-      スタート画面に戻る
-    </button>
-  </ng-container>
+      <div class="question__footer">
+        <button mat-button routerLink="/">コース選択に戻る</button>
+        <button mat-button [routerLink]="['/course', 'fafafa']">
+          スタート画面に戻る
+        </button>
+      </div>
+    </ng-container>
+  </div>
 </div>
