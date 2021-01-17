@@ -7,7 +7,7 @@ export interface Course {
   creatorId: string;
   createdAt: firebase.firestore.Timestamp;
   playCount: number;
-  clearUserCount: number;
+  completedUserCount: number;
   questions: Question[];
 }
 
