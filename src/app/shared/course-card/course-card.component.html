@@ -20,7 +20,10 @@
     /></a>
 
     <div class="card__items">
-      <a [routerLink]="['/play-course/', courseWithUser.courseId]">
+      <a
+        [routerLink]="['/play-course/']"
+        [queryParams]="{ courseId: courseWithUser.courseId, questionNumber: 1 }"
+      >
         <p class="card__title">
           {{ courseWithUser.title ? courseWithUser.title : 'タイトル' }}
         </p>
