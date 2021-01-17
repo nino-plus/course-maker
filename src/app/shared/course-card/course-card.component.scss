@@ -16,6 +16,7 @@
     width: 100%;
     height: 300px;
     object-fit: cover;
+    cursor: pointer;
   }
   &__contents {
     position: relative;
@@ -43,6 +44,7 @@
     overflow: hidden;
     font-size: 14px;
     font-weight: 800;
+    cursor: pointer;
   }
   &__date {
     font-size: 12px;
