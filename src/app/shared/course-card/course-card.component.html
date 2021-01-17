@@ -1,5 +1,8 @@
 <div class="card">
-  <a [routerLink]="['/play-course/', courseWithUser.courseId]">
+  <a
+    [routerLink]="['/play-course/']"
+    [queryParams]="{ courseId: courseWithUser.courseId, questionNumber: 1 }"
+  >
     <img
       [src]="
         courseWithUser.thumbnailURL
