@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { Course, CourseWithUser } from 'src/app/interfaces/course';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { CourseService } from 'src/app/services/course.service';
 import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CourseWithUser } from 'src/app/interfaces/course';
 
 @Component({
   selector: 'app-course-card',

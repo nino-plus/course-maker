@@ -13,12 +13,7 @@ import { Question } from '../interfaces/question';
   providedIn: 'root',
 })
 export class CourseService {
-  constructor(
-    private db: AngularFirestore,
-    private authService: AuthService,
-    private storage: AngularFireStorage,
-    private userService: UserService
-  ) {}
+  constructor(private db: AngularFirestore, private userService: UserService) {}
 
   async createCourse(course: Course) {
     await this.db.doc<Course>(`courses/${course.courseId}`).set(course);
@@ -57,12 +52,28 @@ export class CourseService {
       );
   }
 
-  getCoursesByCreatorId(creatorId: string): Observable<Course[]> {
+  getCoursesWithUserByCreatorId(
+    creatorId: string
+  ): Observable<CourseWithUser[]> {
     return this.db
       .collection<Course>(`courses`, (ref) =>
         ref.where('creatorId', '==', `${creatorId}`)
       )
-      .valueChanges();
+      .valueChanges()
+      .pipe(
+        switchMap((courses: Course[]) => {
+          const user$ = this.userService.getUser(creatorId);
+          return combineLatest([of(courses), user$]);
+        }),
+        map(([courses, user]) => {
+          return courses.map((course) => {
+            return {
+              ...course,
+              user,
+            };
+          });
+        })
+      );
   }
 
   getCourse(courseId: string): Observable<Course> {
