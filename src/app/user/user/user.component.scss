@@ -37,3 +37,55 @@
     }
   }
 }
+button {
+  display: block;
+  margin: 0 auto;
+}
+
+.avatar-section {
+  margin-bottom: 40px;
+  color: black;
+}
+
+.name-section {
+  color: black;
+}
+
+.profile {
+  text-align: center;
+}
+
+.avatar-wrapper {
+  width: 160px;
+  display: block;
+  position: relative;
+  margin: 0 auto 16px;
+  &::before {
+    font-family: 'Material Icons';
+    content: '\e439';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 8px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    background-color: #c7d0d8;
+    z-index: 1;
+  }
+}
+
+.avatar {
+  width: 160px;
+  display: block;
+  position: relative;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+}
+
+.crop {
+  display: none;
+}
