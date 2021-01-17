@@ -1,7 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&family=Bungee+Shade&family=Kosugi+Maru&family=Press+Start+2P&family=Yusei+Magic&display=swap');
-
 @import 'mixins';
 @import 'variables';
+
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&family=Bungee+Shade&family=Kosugi+Maru&family=Press+Start+2P&display=swap');
+
+@import '~@angular/material/theming';
+
+$candy-app-primary: mat-palette($mat-orange);
+$candy-app-accent: mat-palette($mat-orange, A200, A100, A400);
+$candy-app-warn: mat-palette($mat-red);
+
+$custom-theme: mat-light-theme(
+  $candy-app-primary,
+  $candy-app-accent,
+  $candy-app-warn
+);
+@include angular-material-theme($custom-theme);
+
+$custom-typography: mat-typography-config(
+  $font-family: $font-default,
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(16px, 24px, 500),
+);
+@include angular-material-typography($custom-typography);
 
 *,
 *::before,
@@ -43,4 +63,41 @@ body {
 img {
   max-width: 100%;
   vertical-align: middle;
+}
+
+.btn-original {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  padding: 0.75em 2em;
+  background-color: $color-main;
+  color: $color-text;
+  text-decoration: none;
+  border: 2px solid $color-text;
+  border-radius: 50px;
+  font-family: $font-maru;
+  font-size: 14px;
+  line-height: 1;
+  box-shadow: 2px 2px 0 $color-text;
+  transform: translate(-2px, -2px);
+  transition: 0.4s;
+  @include pc {
+    font-size: 18px;
+  }
+  &:hover {
+    box-shadow: 0 0 0 $color-text;
+    transform: translate(0, 0);
+  }
+  &--white {
+    background-color: #fff;
+  }
+  &[disabled] {
+    cursor: not-allowed;
+    background-color: #e5e5e5;
+    box-shadow: 0 0 0 $color-text;
+    transform: translate(0, 0);
+  }
+  & + & {
+    margin-left: 16px;
+  }
 }
