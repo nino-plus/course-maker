@@ -91,6 +91,11 @@ button {
     background-color: #c7d0d8;
     z-index: 1;
   }
+  &--nouser {
+    &::before {
+      display: none;
+    }
+  }
 }
 
 .avatar {
