@@ -60,6 +60,9 @@ img {
   max-width: 100%;
   vertical-align: middle;
 }
+.mat-step-header .mat-step-icon {
+  color: #fff;
+}
 .mat-step-header .mat-step-icon-selected {
   background-color: $color-main;
   color: $color-text;
@@ -81,9 +84,7 @@ img {
 .mat-dialog-title {
   font-family: $font-maru;
 }
-.mat-step-header .mat-step-icon {
-  color: #fff;
-}
+
 .btn-original {
   cursor: pointer;
   position: relative;
