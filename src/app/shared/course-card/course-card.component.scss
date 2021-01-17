@@ -54,15 +54,11 @@
     justify-content: space-between;
     margin-top: 16px;
   }
-  &__cleared {
-    margin: 0 0 8px 0;
-    img {
-      width: 16px;
-      height: 16px;
-    }
-  }
-  &__played {
+  &__people {
     margin: 0;
+    p {
+      color: #5d3427;
+    }
     img {
       width: 16px;
       height: 16px;

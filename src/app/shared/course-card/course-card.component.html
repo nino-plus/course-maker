@@ -36,7 +36,7 @@
       [matMenuTriggerFor]="menuRef"
       class="card__menu-btn"
       mat-icon-button
-      *ngIf="courseWithUser.creatorId"
+      *ngIf="uid === courseWithUser.creatorId"
     >
       <mat-icon class="material-icons"> more_vert </mat-icon>
     </button>
