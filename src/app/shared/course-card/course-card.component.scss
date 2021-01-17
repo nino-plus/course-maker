@@ -20,6 +20,8 @@
   &__contents {
     position: relative;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 24px 16px;
     margin: auto 0;
     background: #face01;
@@ -36,7 +38,7 @@
   }
   &__title {
     margin: 0;
-    margin-bottom: 4px;
+    margin-bottom: 8px;
     word-break: break-all;
     overflow: hidden;
     font-size: 14px;
@@ -47,4 +49,27 @@
     opacity: 0.37;
     word-wrap: break-word;
   }
+  &__people {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+  }
+  &__cleared {
+    margin: 0 0 8px 0;
+    img {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  &__played {
+    margin: 0;
+    img {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+a {
+  color: rgba(black, 0.8);
 }

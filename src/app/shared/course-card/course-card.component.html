@@ -7,16 +7,29 @@
     <img class="card__avatar" [src]="courseWithUser.user.avatarUrl" alt="" />
 
     <div class="card__items">
-      <a [routerLink]="">
-        <p class="card__title">コースタイトル</p>
-        <span class="card__date">
-          作成日:{{
-            courseWithUser.createdAt
-              ? (courseWithUser.createdAt.toDate() | date: 'yyyy/MM/dd')
-              : '2020/12/05'
-          }}</span
-        >
+      <a [routerLink]="['/play-course/', courseWithUser.courseId]">
+        <p class="card__title">
+          {{ courseWithUser.title ? courseWithUser.title : 'タイトル' }}
+        </p>
       </a>
+      <span class="card__date">
+        作成日:{{
+          courseWithUser.createdAt
+            ? (courseWithUser.createdAt.toDate() | date: 'yyyy/MM/dd')
+            : '2020/12/05'
+        }}</span
+      >
+
+      <div class="card__people">
+        <p class="card__cleared">
+          <img src="assets/images/cleared_icon.svg" alt="" />
+          {{ courseWithUser.clearUserCount }}
+        </p>
+        <p class="card__played">
+          <img src="assets/images/played_icon.svg" alt="" />
+          {{ courseWithUser.playCount }}
+        </p>
+      </div>
     </div>
 
     <button
