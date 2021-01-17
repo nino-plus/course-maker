@@ -55,12 +55,28 @@ export class CourseService {
       );
   }
 
-  getCoursesByCreatorId(creatorId: string): Observable<Course[]> {
+  getCoursesWithUserByCreatorId(
+    creatorId: string
+  ): Observable<CourseWithUser[]> {
     return this.db
       .collection<Course>(`courses`, (ref) =>
         ref.where('creatorId', '==', `${creatorId}`)
       )
-      .valueChanges();
+      .valueChanges()
+      .pipe(
+        switchMap((courses: Course[]) => {
+          const user$ = this.userService.getUser(creatorId);
+          return combineLatest([of(courses), user$]);
+        }),
+        map(([courses, user]) => {
+          return courses.map((course) => {
+            return {
+              ...course,
+              user,
+            };
+          });
+        })
+      );
   }
 
   getCourse(courseId: string): Observable<Course> {

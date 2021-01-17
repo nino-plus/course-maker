@@ -5,6 +5,7 @@ export interface Course {
   title: string;
   courseId: string;
   creatorId: string;
+  thumbnailURL?: string;
   createdAt: firebase.firestore.Timestamp;
   playCount: number;
   completedUserCount: number;

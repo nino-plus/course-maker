@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { User } from 'src/app/interfaces/user';
 import { switchMap } from 'rxjs/operators';
-import { Course } from 'src/app/interfaces/course';
+import { CourseWithUser } from 'src/app/interfaces/course';
 import { AuthService } from 'src/app/services/auth.service';
 import { CourseService } from 'src/app/services/course.service';
 import { UserService } from 'src/app/services/user.service';
@@ -21,10 +21,10 @@ export class UserComponent implements OnInit {
   imageFile: string;
   nameForm = new FormControl('', [Validators.maxLength(30)]);
 
-  courses$: Observable<Course[]> = this.route.paramMap.pipe(
+  coursesWithUser$: Observable<CourseWithUser[]> = this.route.paramMap.pipe(
     switchMap((params) => {
       if (params) {
-        return this.courseService.getCoursesByCreatorId(
+        return this.courseService.getCoursesWithUserByCreatorId(
           params.get('creatorId')
         );
       } else {

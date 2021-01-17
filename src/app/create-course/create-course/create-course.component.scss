@@ -1,3 +1,15 @@
+@import 'mixins';
+@import 'variables';
+
+* {
+  font-family: $font-maru;
+}
+:host {
+  .mat-raised-button.mat-primary {
+    background-color: $color-main;
+  }
+}
+
 .image {
   margin: 16px auto 32px;
   padding: 16px 0;
@@ -11,4 +23,87 @@
 .cropper {
   width: 232px;
   display: inline-block;
+}
+
+mat-form-field {
+  display: block;
+}
+
+.create {
+  overflow: scroll;
+  height: 100%;
+  padding: 40px 0;
+  @include pc {
+    padding: 80px 0;
+  }
+  &__maparea {
+    margin-top: 1em;
+    margin-bottom: 8px;
+    border: 2px solid $color-text;
+    border-radius: 8px;
+    overflow: hidden;
+    @include pc {
+      margin-top: 0;
+    }
+  }
+  &__btn {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    padding: 0.75em 2em;
+    background-color: $color-main;
+    color: $color-text;
+    text-decoration: none;
+    border: 2px solid $color-text;
+    border-radius: 50px;
+    font-family: $font-maru;
+    font-size: 14px;
+    line-height: 1;
+    box-shadow: 2px 2px 0 $color-text;
+    transform: translate(-2px, -2px);
+    transition: 0.4s;
+    @include pc {
+      font-size: 18px;
+    }
+    &:hover {
+      box-shadow: 0 0 0 $color-text;
+      transform: translate(0, 0);
+    }
+    &[disabled] {
+      cursor: not-allowed;
+      background-color: #e5e5e5;
+      box-shadow: 0 0 0 $color-text;
+      transform: translate(0, 0);
+    }
+    &:active {
+      outline: none;
+    }
+  }
+}
+
+.btn__wrapper {
+  margin: 16px 0;
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  align-items: center;
+  &--final {
+    justify-content: center;
+  }
+}
+
+.course-title {
+  position: relative;
+  padding: 0.5em 1em;
+  margin: 0;
+  margin-bottom: 40px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: center;
+  border-top: 4px solid $color-text;
+  border-bottom: 4px solid $color-text;
+  @include pc {
+    font-size: 32px;
+  }
 }
