@@ -1,0 +1,84 @@
+@import 'mixins';
+@import 'variables';
+
+.result {
+  padding: 40px 0;
+  @include pc {
+    padding: 60px 0;
+  }
+  &__title {
+    padding-top: 24px;
+    color: $color-main-deep;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0.05em;
+    text-align: center;
+    text-shadow: 1px 1px 0px $color-text, -1px 1px 0px $color-text,
+      1px -1px 0px $color-text, -1px -1px 0px $color-text,
+      1px 0px 0px $color-text, 0px 1px 0px $color-text, -1px 0px 0px $color-text,
+      0px -1px 0px $color-text;
+    @include pc {
+      font-size: 32px;
+    }
+  }
+  &__data {
+    position: relative;
+    margin: 2em auto 0;
+    max-width: 500px;
+    text-align: center;
+    dt {
+      display: inline-block;
+      position: absolute;
+      top: -0.5em;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #fff;
+      color: $color-main-deep;
+      padding: 0 0.5em;
+      min-width: 260px;
+    }
+    dd {
+      margin: 0;
+      border: 2px solid $color-main-deep;
+      border-radius: 4px;
+      padding: 1em;
+    }
+    ul {
+      padding: 0;
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    li {
+      margin: 0 16px;
+    }
+    a {
+      transition: opacity 0.4s;
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+    img {
+      display: block;
+      width: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+  }
+  &__img {
+    margin: 2em auto 0;
+    max-width: 180px;
+    @include pc {
+      max-width: 320px;
+    }
+    img {
+      width: 100%;
+    }
+  }
+  &__actions {
+    margin-top: 3em;
+    text-align: center;
+  }
+}
