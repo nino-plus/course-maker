@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { combineLatest, Observable } from 'rxjs';
@@ -11,7 +12,8 @@ import { User } from '../interfaces/user';
 export class UserService {
   constructor(
     private db: AngularFirestore,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private afAuth: AngularFireAuth
   ) {}
 
   getUser(uid: string): Observable<User> {
@@ -47,5 +49,9 @@ export class UserService {
           );
         })
       );
+  }
+
+  async deleteUser(): Promise<void> {
+    return (await this.afAuth.currentUser).delete();
   }
 }
