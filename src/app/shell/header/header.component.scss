@@ -3,6 +3,7 @@
 
 .header {
   background-color: $color-main;
+  min-width: 960px;
   padding: 16px;
   &__spacer {
     flex: 1 1 auto;
