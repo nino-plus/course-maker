@@ -75,6 +75,9 @@ button {
   display: block;
   position: relative;
   margin: 0 auto 16px;
+  &__avatar-img {
+    padding-bottom: 8px;
+  }
   &::before {
     font-family: 'Material Icons';
     content: '\e439';
@@ -104,6 +107,7 @@ button {
   position: relative;
   margin: 0 auto 16px;
   border-radius: 50%;
+  padding-top: 4px;
 }
 
 .crop {

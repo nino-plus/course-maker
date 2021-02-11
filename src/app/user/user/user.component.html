@@ -3,11 +3,11 @@
     <ng-container *ngIf="creator$ | async as creator">
       <h2 class="course__title">ユーザー</h2>
       <section class="avatar-section">
+        <p>アバター画像</p>
         <label
           class="avatar-wrapper"
           [class.avatar-wrapper--nouser]="!isMyAccount"
         >
-          <p>アバター画像</p>
           <img
             class="avatar"
             [src]="imageFile ? imageFile : creator.avatarUrl"
