@@ -50,10 +50,7 @@
     </button>
     <mat-menu #menuRef="matMenu">
       <!-- ここのボタンにdeleteCourse()のクリックを設定する -->
-      <button
-        mat-menu-item
-        (click)="openDeleteCourseDialog(courseWithUser.title)"
-      >
+      <button mat-menu-item (click)="openDeleteCourseDialog(courseWithUser)">
         <mat-icon>delete</mat-icon>
         <span>削除</span>
       </button>

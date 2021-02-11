@@ -44,19 +44,19 @@ export class CourseCardComponent implements OnInit {
     });
   }
 
-  openDeleteCourseDialog(title: string): void {
+  openDeleteCourseDialog(course: CourseWithUser): void {
     this.dialog
       .open(DeleteDialogComponent, {
         restoreFocus: false,
         autoFocus: false,
         data: {
-          title,
+          title: course.title,
         },
       })
       .afterClosed()
       .subscribe((res) => {
         if (res) {
-          console.log(res);
+          this.courseService.deleteCourse(course.courseId);
         }
       });
   }

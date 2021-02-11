@@ -102,4 +102,8 @@ export class CourseService {
     const callable = this.fns.httpsCallable('countUpCompletedOnCall');
     return callable(courseId).toPromise();
   }
+
+  deleteCourse(courseId: string): Promise<void> {
+    return this.db.doc(`courses/${courseId}`).delete();
+  }
 }
