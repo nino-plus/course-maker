@@ -8,6 +8,8 @@ import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CourseWithUser } from 'src/app/interfaces/course';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-course-card',
@@ -25,7 +27,8 @@ export class CourseCardComponent implements OnInit {
     private userService: UserService,
     private courseService: CourseService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {}
@@ -39,5 +42,22 @@ export class CourseCardComponent implements OnInit {
         },
       });
     });
+  }
+
+  openDeleteCourseDialog(course: CourseWithUser): void {
+    this.dialog
+      .open(DeleteDialogComponent, {
+        restoreFocus: false,
+        autoFocus: false,
+        data: {
+          title: course.title,
+        },
+      })
+      .afterClosed()
+      .subscribe((res) => {
+        if (res) {
+          this.courseService.deleteCourse(course.courseId);
+        }
+      });
   }
 }

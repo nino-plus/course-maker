@@ -50,8 +50,8 @@ export class CourseService {
           return courses.map((course) => {
             return {
               ...course,
-              user: creators.find(
-                (creator) => course.creatorId === creator.uid
+              user: creators?.find(
+                (creator) => course?.creatorId === creator?.uid
               ),
             };
           });
@@ -120,5 +120,9 @@ export class CourseService {
   countUpCompleted(courseId: string): Promise<void> {
     const callable = this.fns.httpsCallable('countUpCompletedOnCall');
     return callable(courseId).toPromise();
+  }
+
+  deleteCourse(courseId: string): Promise<void> {
+    return this.db.doc(`courses/${courseId}`).delete();
   }
 }

@@ -1,0 +1,12 @@
+<h1 matDialogTitle>{{ data.title }}を削除</h1>
+
+<mat-dialog-content>
+  <p>本当にこの{{ data.title }}を削除してよろしいですか？</p>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button matDialogClose>キャンセル</button>
+  <button [matDialogClose]="true" mat-raised-button color="warn">
+    削除する
+  </button>
+</mat-dialog-actions>

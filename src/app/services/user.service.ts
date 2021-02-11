@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { combineLatest, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { User } from '../interfaces/user';
+import firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +13,8 @@ import { User } from '../interfaces/user';
 export class UserService {
   constructor(
     private db: AngularFirestore,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private afAuth: AngularFireAuth
   ) {}
 
   getUser(uid: string): Observable<User> {
@@ -47,5 +50,18 @@ export class UserService {
           );
         })
       );
+  }
+
+  async deleteUser(): Promise<void> {
+    const user: firebase.User = await this.afAuth.currentUser;
+    const twitterAuthProvider: firebase.auth.TwitterAuthProvider = new firebase.auth.TwitterAuthProvider();
+    return user
+      .reauthenticateWithPopup(twitterAuthProvider)
+      .then(() => {
+        return user.delete();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 }
