@@ -79,6 +79,7 @@ export class CreateCourseComponent implements OnInit {
             [Validators.required, Validators.maxLength(this.maxTitleLength)],
           ],
           hint: ['', [Validators.maxLength(this.maxTitleLength)]],
+          inputHint: ['', [Validators.maxLength(this.maxTitleLength)]],
           answer: [
             '',
             [Validators.required, Validators.maxLength(this.maxTitleLength)],
@@ -90,6 +91,7 @@ export class CreateCourseComponent implements OnInit {
             [Validators.required, Validators.maxLength(this.maxTitleLength)],
           ],
           hint: ['', [Validators.maxLength(this.maxTitleLength)]],
+          inputHint: ['', [Validators.maxLength(this.maxTitleLength)]],
           answer: [
             '',
             [Validators.required, Validators.maxLength(this.maxTitleLength)],
@@ -101,6 +103,7 @@ export class CreateCourseComponent implements OnInit {
             [Validators.required, Validators.maxLength(this.maxTitleLength)],
           ],
           hint: ['', [Validators.maxLength(this.maxTitleLength)]],
+          inputHint: ['', [Validators.maxLength(this.maxTitleLength)]],
           answer: [
             '',
             [Validators.required, Validators.maxLength(this.maxTitleLength)],
