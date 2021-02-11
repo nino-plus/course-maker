@@ -3,6 +3,7 @@ import * as functions from 'firebase-functions';
 import { deleteCollectionByPath } from './utils/delete.function';
 
 const db = admin.firestore();
+const storage = admin.storage().bucket();
 
 export const countUpPlayed = functions
   .region('asia-northeast1')
@@ -20,5 +21,13 @@ export const deleteCourseCompletedUserIds = functions
   .region('asia-northeast1')
   .firestore.document('courses/{courseId}')
   .onDelete(async (snap, context) => {
-    return deleteCollectionByPath(`courses/${context.params.courseId}`);
+    const deleleteCourseStorage = storage.deleteFiles({
+      directory: `courses/${context.params.courseId}`,
+    });
+    return Promise.all([
+      deleteCollectionByPath(
+        `courses/${context.params.courseId}/completedUserIds`
+      ),
+      deleleteCourseStorage,
+    ]);
   });

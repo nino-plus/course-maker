@@ -46,8 +46,8 @@ export class CourseService {
           return courses.map((course) => {
             return {
               ...course,
-              user: creators.find(
-                (creator) => course.creatorId === creator.uid
+              user: creators?.find(
+                (creator) => course?.creatorId === creator?.uid
               ),
             };
           });

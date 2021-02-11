@@ -6,6 +6,7 @@ import {
 } from './utils/delete.function';
 
 const db = admin.firestore();
+const storage = admin.storage().bucket();
 
 export const createUser = functions
   .region('asia-northeast1')
@@ -25,9 +26,18 @@ export const deleteUserAccount = functions
   .onDelete(async (user, _) => {
     const uid = user.uid;
     const courses = db.collection(`courses`).where('creatorId', '==', uid);
+    const deleteUser = db.doc(`users/${uid}`).delete();
+    const deleleteUserStorage = storage.deleteFiles({
+      directory: `users/${uid}`,
+    });
     const deleteAllCourses = deleteCollectionByReference(courses);
     const deleteAllCompleteCourses = deleteCollectionByPath(
       `users/${uid}/completeCourses`
     );
-    return Promise.all([deleteAllCourses, deleteAllCompleteCourses]);
+    return Promise.all([
+      deleteAllCourses,
+      deleteAllCompleteCourses,
+      deleteUser,
+      deleleteUserStorage,
+    ]);
   });
