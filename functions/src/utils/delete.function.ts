@@ -35,7 +35,7 @@ function deleteQueryBatch(
   query
     .get()
     .then((snapshot) => {
-      if (snapshot.size == 0) {
+      if (snapshot.size === 0) {
         return 0;
       }
 
@@ -44,7 +44,7 @@ function deleteQueryBatch(
       return batch.commit().then(() => snapshot.size);
     })
     .then((numDeleted) => {
-      if (numDeleted == 0) {
+      if (numDeleted === 0) {
         resolve();
         return;
       }
