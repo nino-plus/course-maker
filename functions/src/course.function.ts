@@ -1,5 +1,6 @@
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
+import { deleteCollectionByPath } from './utils/delete.function';
 
 const db = admin.firestore();
 
@@ -13,4 +14,11 @@ export const countUpPlayed = functions
     } else {
       return;
     }
+  });
+
+export const deleteCourseCompletedUserIds = functions
+  .region('asia-northeast1')
+  .firestore.document('courses/{courseId}')
+  .onDelete(async (snap, context) => {
+    return deleteCollectionByPath(`courses/${context.params.courseId}`);
   });
