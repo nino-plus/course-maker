@@ -26,6 +26,9 @@ export const deleteUserAccount = functions
   .onDelete(async (user, _) => {
     const uid = user.uid;
     const courses = db.collection(`courses`).where('creatorId', '==', uid);
+    const completedUserIds = db
+      .collectionGroup('completedUserIds')
+      .where('userId', '==', uid);
     const deleteUser = db.doc(`users/${uid}`).delete();
     const deleleteUserStorage = storage.deleteFiles({
       directory: `users/${uid}`,
@@ -34,10 +37,14 @@ export const deleteUserAccount = functions
     const deleteAllCompleteCourses = deleteCollectionByPath(
       `users/${uid}/completeCourses`
     );
+    const deleteAllCompletedUserIds = deleteCollectionByReference(
+      completedUserIds
+    );
     return Promise.all([
       deleteAllCourses,
       deleteAllCompleteCourses,
       deleteUser,
       deleleteUserStorage,
+      deleteAllCompletedUserIds,
     ]);
   });
