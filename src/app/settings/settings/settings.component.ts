@@ -19,15 +19,6 @@ export class SettingsComponent implements OnInit {
   imageFile: string;
   nameForm = new FormControl('', [Validators.maxLength(30)]);
 
-  // creator$: Observable<User> = this.route.paramMap.pipe(
-  //   switchMap((params) => {
-  //     if (params) {
-  //       return this.userService.getUser(params.get('creatorId'));
-  //     } else {
-  //       return of(null);
-  //     }
-  //   })
-  // );
   constructor(
     private userService: UserService,
     private snackBar: MatSnackBar,
@@ -42,8 +33,6 @@ export class SettingsComponent implements OnInit {
       } else {
         this.isMyAccount = false;
       }
-      console.log(this.userService.getUser(this.authService.uid));
-      console.log(this.authService.uid);
     });
   }
   onCroppedImage(image: string) {
