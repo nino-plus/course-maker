@@ -10,9 +10,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 @NgModule({
-  declarations: [CourseCardComponent],
+  declarations: [CourseCardComponent, DeleteDialogComponent],
   imports: [
     CommonModule,
     SharedRoutingModule,
@@ -31,6 +32,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatInputModule,
     MatDialogModule,
     CourseCardComponent,
+    DeleteDialogComponent,
   ],
 })
 export class SharedModule {}

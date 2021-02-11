@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import {
+  AngularFirestore,
+  QueryDocumentSnapshot,
+} from '@angular/fire/firestore';
 import { AngularFireFunctions } from '@angular/fire/functions';
+
 import { combineLatest, Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Course, CourseWithUser } from '../interfaces/course';
@@ -46,13 +50,28 @@ export class CourseService {
           return courses.map((course) => {
             return {
               ...course,
-              user: creators.find(
-                (creator) => course.creatorId === creator.uid
+              user: creators?.find(
+                (creator) => course?.creatorId === creator?.uid
               ),
             };
           });
         })
       );
+  }
+
+  getCoursesForInfinitScroll(
+    startAt?: QueryDocumentSnapshot<Course>
+  ): Observable<QueryDocumentSnapshot<Course>[]> {
+    return this.db
+      .collection<Course>('courses', (ref) => {
+        if (startAt) {
+          return ref.orderBy('createdAt', 'desc').startAfter(startAt).limit(3);
+        } else {
+          return ref.orderBy('createdAt', 'desc').limit(6);
+        }
+      })
+      .snapshotChanges()
+      .pipe(map((snaps) => snaps.map((snap) => snap.payload.doc)));
   }
 
   getCoursesWithUserByCreatorId(
@@ -101,5 +120,9 @@ export class CourseService {
   countUpCompleted(courseId: string): Promise<void> {
     const callable = this.fns.httpsCallable('countUpCompletedOnCall');
     return callable(courseId).toPromise();
+  }
+
+  deleteCourse(courseId: string): Promise<void> {
+    return this.db.doc(`courses/${courseId}`).delete();
   }
 }

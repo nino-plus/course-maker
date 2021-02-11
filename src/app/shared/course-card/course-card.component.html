@@ -49,8 +49,7 @@
       <mat-icon class="material-icons"> more_vert </mat-icon>
     </button>
     <mat-menu #menuRef="matMenu">
-      <!-- ここのボタンにdeleteCourse()のクリックを設定する -->
-      <button mat-menu-item>
+      <button mat-menu-item (click)="openDeleteCourseDialog(courseWithUser)">
         <mat-icon>delete</mat-icon>
         <span>削除</span>
       </button>

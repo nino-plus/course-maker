@@ -9,6 +9,8 @@ import { CourseWithUser } from 'src/app/interfaces/course';
 import { AuthService } from 'src/app/services/auth.service';
 import { CourseService } from 'src/app/services/course.service';
 import { UserService } from 'src/app/services/user.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-user',
@@ -46,7 +48,8 @@ export class UserComponent implements OnInit {
     private snackBar: MatSnackBar,
     private courseService: CourseService,
     private route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -60,10 +63,10 @@ export class UserComponent implements OnInit {
       console.log(this.authService.uid);
     });
   }
-  onCroppedImage(image: string) {
+  onCroppedImage(image: string): void {
     this.imageFile = image;
   }
-  updateUserAvatar() {
+  updateUserAvatar(): Promise<void> {
     return this.userService
       .updateUserAvatar(this.authService.uid, this.imageFile)
       .then(() => {
@@ -84,6 +87,23 @@ export class UserComponent implements OnInit {
       })
       .catch(() => {
         this.snackBar.open('変更に失敗しました', null);
+      });
+  }
+
+  openDeleteDialog(): void {
+    this.dialog
+      .open(DeleteDialogComponent, {
+        restoreFocus: false,
+        autoFocus: false,
+        data: {
+          title: 'アカウント',
+        },
+      })
+      .afterClosed()
+      .subscribe((res) => {
+        if (res) {
+          this.userService.deleteUser();
+        }
       });
   }
 }
