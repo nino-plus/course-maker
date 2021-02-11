@@ -1,8 +1,9 @@
 @import 'mixins';
 @import 'variables';
 
-.course {
-  padding-top: 24px;
+.setting {
+  padding: 12px 12px;
+  text-align: center;
   &__title {
     position: relative;
     padding: 0.5em 1em;
@@ -52,13 +53,49 @@
     font-size: 24px;
   }
 }
+button {
+  display: block;
+  margin: 0 auto;
+}
 
-.name {
+.avatar-section {
+  margin-bottom: 40px;
   color: black;
 }
 
-.profile {
-  text-align: center;
+.name-section {
+  color: black;
+}
+
+.avatar-wrapper {
+  width: 160px;
+  display: block;
+  position: relative;
+  margin: 0 auto 16px;
+  &__avatar-img {
+    padding-bottom: 8px;
+  }
+  &::before {
+    font-family: 'Material Icons';
+    content: '\e439';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 8px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    background-color: #c7d0d8;
+    z-index: 1;
+  }
+  &--nouser {
+    &::before {
+      display: none;
+    }
+  }
 }
 
 .avatar {
@@ -68,4 +105,8 @@
   margin: 0 auto 16px;
   border-radius: 50%;
   padding-top: 4px;
+}
+
+.crop {
+  display: none;
 }
