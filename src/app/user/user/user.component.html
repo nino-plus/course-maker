@@ -1,66 +1,15 @@
 <div class="container">
-  <div class="profile">
+  <section class="profile">
     <ng-container *ngIf="creator$ | async as creator">
       <h2 class="course__title">ユーザー</h2>
-      <section class="avatar-section">
-        <p>アバター画像</p>
-        <label
-          class="avatar-wrapper"
-          [class.avatar-wrapper--nouser]="!isMyAccount"
-        >
-          <img
-            class="avatar"
-            [src]="imageFile ? imageFile : creator.avatarUrl"
-            alt=""
-            (click)="crop.input.nativeElement.click()"
-          />
-        </label>
-        <deer-crop-trigger
-          class="crop"
-          #crop
-          [options]="{
-            aspectRatio: 1 / 1
-          }"
-          (image)="onCroppedImage($event)"
-        ></deer-crop-trigger>
-        <button
-          *ngIf="isMyAccount"
-          mat-raised-button
-          color="primary"
-          [disabled]="!imageFile"
-          (click)="updateUserAvatar()"
-        >
-          更新する
-        </button>
-      </section>
-      <section class="name-section">
-        <p>名前： {{ creator.displayName }}</p>
-        <div *ngIf="isMyAccount">
-          <mat-form-field>
-            <input
-              type="text"
-              matInput
-              autocomplete="off"
-              placeholder="新しい名前"
-              [formControl]="nameForm"
-            />
-            <mat-error *ngIf="nameForm.hasError('maxlength')"
-              >30文字以内にしてください</mat-error
-            >
-          </mat-form-field>
-          <button
-            mat-flat-button
-            color="primary"
-            [disabled]="nameForm.pristine"
-            (click)="updateUserName()"
-            class="button"
-          >
-            更新する
-          </button>
-        </div>
-      </section>
+      <img
+        class="avatar"
+        [src]="imageFile ? imageFile : creator.avatarUrl"
+        alt=""
+      />
+      <p class="name">名前： {{ creator.displayName }}</p>
     </ng-container>
-  </div>
+  </section>
 
   <section class="course">
     <h2 class="course__title">作ったコース一覧</h2>

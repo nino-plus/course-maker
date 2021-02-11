@@ -1,0 +1,65 @@
+<div class="container">
+  <ng-container *ngIf="$user | async as user">
+    <div class="setting">
+      <h2 class="setting__title">ユーザー設定</h2>
+      <section class="avatar-section">
+        <p>アバター画像</p>
+        <label class="avatar-wrapper">
+          <img
+            class="avatar"
+            [src]="imageFile ? imageFile : user.avatarUrl"
+            alt=""
+            (click)="crop.input.nativeElement.click()"
+          />
+        </label>
+        <deer-crop-trigger
+          class="crop"
+          #crop
+          [options]="{
+            aspectRatio: 1 / 1
+          }"
+          (image)="onCroppedImage($event)"
+        ></deer-crop-trigger>
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!imageFile"
+          (click)="updateUserAvatar()"
+        >
+          更新する
+        </button>
+      </section>
+      <section class="name-section">
+        <p>名前： {{ user.displayName }}</p>
+        <div>
+          <mat-form-field>
+            <input
+              type="text"
+              matInput
+              autocomplete="off"
+              placeholder="新しい名前"
+              [formControl]="nameForm"
+            />
+            <mat-error *ngIf="nameForm.hasError('maxlength')"
+              >30文字以内にしてください</mat-error
+            >
+          </mat-form-field>
+          <button
+            mat-flat-button
+            color="primary"
+            [disabled]="nameForm.pristine"
+            (click)="updateUserName()"
+            class="button"
+          >
+            更新する
+          </button>
+        </div>
+      </section>
+    </div>
+    <div class="setting">
+      <h2 class="setting__title">退会</h2>
+      <p>退会すると全てのデータが削除されます</p>
+      <button mat-flat-button color="warn" class="button">退会する</button>
+    </div>
+  </ng-container>
+</div>
