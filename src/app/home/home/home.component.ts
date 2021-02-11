@@ -84,7 +84,6 @@ export class HomeComponent implements OnInit, OnDestroy {
               this.isComplete = true;
               return;
             }
-            console.log('compare:', docs);
             // 最初の取得が３回coursesにプッシュされてしまうので、同じ配列の場合プッシュしないように条件式を設定
             if (JSON.stringify(docs) !== JSON.stringify(this.courses)) {
               this.courses.push(...docs);
