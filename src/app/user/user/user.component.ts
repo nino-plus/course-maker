@@ -59,8 +59,6 @@ export class UserComponent implements OnInit {
       } else {
         this.isMyAccount = false;
       }
-      console.log(this.authService);
-      console.log(this.authService.uid);
     });
   }
   onCroppedImage(image: string): void {
