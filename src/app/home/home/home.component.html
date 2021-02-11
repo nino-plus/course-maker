@@ -2,8 +2,16 @@
   <h1>コース一覧</h1>
   <img src="assets/images/list_image.png" alt="" />
 </div>
-<div class="home-wrapper" *ngIf="courses$ | async as courses">
+<div class="home-wrapper" *ngIf="courses as courses">
   <ng-container *ngFor="let course of courses">
     <app-course-card [courseWithUser]="course"></app-course-card>
   </ng-container>
+  <div
+    class="search-results"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    (scrolled)="getCourses()"
+  ></div>
 </div>
+<mat-spinner class="spinner" *ngIf="isLoading" [diameter]="56"></mat-spinner>

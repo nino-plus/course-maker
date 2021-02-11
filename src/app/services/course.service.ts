@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import {
+  AngularFirestore,
+  QueryDocumentSnapshot,
+} from '@angular/fire/firestore';
 import { AngularFireFunctions } from '@angular/fire/functions';
+
 import { combineLatest, Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Course, CourseWithUser } from '../interfaces/course';
@@ -53,6 +57,21 @@ export class CourseService {
           });
         })
       );
+  }
+
+  getCoursesForInfinitScroll(
+    startAt?: QueryDocumentSnapshot<Course>
+  ): Observable<QueryDocumentSnapshot<Course>[]> {
+    return this.db
+      .collection<Course>('courses', (ref) => {
+        if (startAt) {
+          return ref.orderBy('createdAt', 'desc').startAfter(startAt).limit(3);
+        } else {
+          return ref.orderBy('createdAt', 'desc').limit(6);
+        }
+      })
+      .snapshotChanges()
+      .pipe(map((snaps) => snaps.map((snap) => snap.payload.doc)));
   }
 
   getCoursesWithUserByCreatorId(
