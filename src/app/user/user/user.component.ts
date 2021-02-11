@@ -9,8 +9,6 @@ import { CourseWithUser } from 'src/app/interfaces/course';
 import { AuthService } from 'src/app/services/auth.service';
 import { CourseService } from 'src/app/services/course.service';
 import { UserService } from 'src/app/services/user.service';
-import { MatDialog } from '@angular/material/dialog';
-import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-user',
@@ -48,8 +46,7 @@ export class UserComponent implements OnInit {
     private snackBar: MatSnackBar,
     private courseService: CourseService,
     private route: ActivatedRoute,
-    private authService: AuthService,
-    private dialog: MatDialog
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -85,23 +82,6 @@ export class UserComponent implements OnInit {
       })
       .catch(() => {
         this.snackBar.open('変更に失敗しました', null);
-      });
-  }
-
-  openDeleteDialog(): void {
-    this.dialog
-      .open(DeleteDialogComponent, {
-        restoreFocus: false,
-        autoFocus: false,
-        data: {
-          title: 'アカウント',
-        },
-      })
-      .afterClosed()
-      .subscribe((res) => {
-        if (res) {
-          this.userService.deleteUser();
-        }
       });
   }
 }
