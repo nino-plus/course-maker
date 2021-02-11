@@ -38,6 +38,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('../user/user.module').then((m) => m.UserModule),
       },
+      {
+        path: 'privacy',
+        loadChildren: () =>
+          import('../privacy/privacy.module').then((m) => m.PrivacyModule),
+      },
     ],
   },
 ];

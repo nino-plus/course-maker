@@ -1,0 +1,15 @@
+.container {
+  margin: 0 auto;
+  min-width: 960px;
+}
+
+.privacy {
+  margin: 0 auto;
+  padding: 40px 20px;
+  &__items {
+    margin: 0;
+  }
+  &__item {
+    padding-top: 10px;
+  }
+}
