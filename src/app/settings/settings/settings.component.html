@@ -59,7 +59,14 @@
     <div class="setting">
       <h2 class="setting__title">退会</h2>
       <p>退会すると全てのデータが削除されます</p>
-      <button mat-flat-button color="warn" class="button">退会する</button>
+      <button
+        mat-flat-button
+        (click)="openDeleteDialog()"
+        color="warn"
+        class="button"
+      >
+        退会する
+      </button>
     </div>
   </ng-container>
 </div>
