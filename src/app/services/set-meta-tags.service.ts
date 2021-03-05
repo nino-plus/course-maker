@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Title } from '@angular/platform-browser';
 import { Meta } from '@angular/platform-browser';
 import { tap } from 'rxjs/operators';
@@ -15,6 +16,7 @@ export class SetMetaTagsService {
     private courseService: CourseService,
     private course: Course
   ) {
+    // 静的なページの設定
     this.titleService.setTitle('トップページ | サイト名');
 
     this.meta.addTags([
@@ -27,6 +29,7 @@ export class SetMetaTagsService {
       { property: 'og:image', content: 'ページのサムネイル' },
     ]);
 
+    // 動的なページの場合
     this.courseService.getCourse(course.courseId).pipe(
       tap((course) => {
         this.titleService.setTitle(`${course.title} | CourseMaker`);

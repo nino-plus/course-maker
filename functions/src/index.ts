@@ -5,3 +5,4 @@ export { createUser, deleteUserAccount } from './user.function';
 export { countUpCompleted } from './complete.function';
 export { countUpCompletedOnCall } from './complete.function';
 export { countUpPlayed, deleteCourseCompletedUserIds } from './course.function';
+export { render } from './render.function';
