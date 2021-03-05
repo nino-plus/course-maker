@@ -30,6 +30,7 @@
     "@angular/router": "~11.0.9",
     "@deer-inc/ngx-croppie": "^0.0.17",
     "croppie": "^2.6.5",
+    "express": "^4.17.1",
     "firebase": "^7.0 || ^8.0",
     "ngx-infinite-scroll": "^10.0.1",
     "rxjs": "~6.6.0",

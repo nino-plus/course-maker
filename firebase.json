@@ -1,12 +1,12 @@
 {
   "hosting": {
     "public": "dist/course-maker",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
+      {
+        "source": "/article",
+        "function": "render"
+      },
       {
         "source": "**",
         "destination": "/index.html"
