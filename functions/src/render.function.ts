@@ -34,6 +34,7 @@ const buildHtml = (course: { [key: string]: string }) => {
       )
       // OGP画像を記事のサムネイルURLに置換
       .replace(/content="(.+ogp-cover.png)"/gm, replacer(course.thumbnailURL))
+
       // タイトルを記事タイトルに置換
       .replace(/<title>(.+)<\/title>"/gm, replacer(course.title))
       // OGタイトルを記事タイトルに置換
@@ -43,7 +44,7 @@ const buildHtml = (course: { [key: string]: string }) => {
       )
       // OG:URLを記事URLに置換
       .replace(
-        /<meta property="og:url" content="(.+)" \/>/g,
+        /<meta property="og:url" content="(.+)" \/>/gm,
         replacer('https://course-maker-fb177.web.app/' + course.id)
       )
   );
@@ -57,15 +58,19 @@ app.use(useragent.express());
 
 app.get('*', async (req: any, res: any) => {
   // ロボットであれば置換結果を返却
-  if (req.useragent.isBot) {
+  if (req.useragent.isBot && req.query.courseId) {
     // https://xxx/articles?id=bbb のようなURLを元に記事データをDBから取得
-    const course = (await db.doc(`courses/${req.query.id}`).get())?.data();
+    const course = (
+      await db.doc(`courses/${req.query.courseId}`).get()
+    )?.data();
     if (course) {
       // 結果を返却
       res.send(buildHtml(course));
       return;
     }
   }
+
+  // ロボットでなければ置換せずindex.htmlを返却
   res.send(file);
 });
 
