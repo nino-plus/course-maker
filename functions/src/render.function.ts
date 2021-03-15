@@ -3,7 +3,6 @@ import * as express from 'express';
 import * as useragent from 'express-useragent';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
-// import { db } from './utils/db';
 import * as admin from 'firebase-admin';
 const db = admin.firestore();
 
