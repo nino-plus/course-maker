@@ -22,7 +22,7 @@ export class UserService {
   }
 
   updateUserName(uid: string, displayName: string): Promise<void> {
-    return this.db.doc(`users/${uid}`).update({
+    return this.db.doc<Partial<User>>(`users/${uid}`).update({
       displayName,
     });
   }
