@@ -9,6 +9,7 @@
     }
   },
   "projects": {
-    "default": "course-maker-fb177"
+    "default": "course-maker-fb177",
+    "dev": "course-maker-fb177"
   }
 }
