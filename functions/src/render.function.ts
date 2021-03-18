@@ -13,6 +13,7 @@ const file = readFileSync(resolve(__dirname, 'index.html'), {
 
 // 置換ヘルパー
 const replacer = (data: string) => {
+  functions.logger.info('test1'); // ここはlogger走る
   return (match: string, content: string): string => {
     return match.replace(content, data);
   };
@@ -20,7 +21,7 @@ const replacer = (data: string) => {
 
 // 置換関数
 const buildHtml = (course: { [key: string]: string }) => {
-  functions.logger.info(course.thumbnailURL);
+  functions.logger.info('test2'); // ここはlogger走ってない
   return (
     file
       // descriptionを記事本文の先頭200文字に置換
@@ -57,17 +58,21 @@ const app = express();
 app.use(useragent.express());
 
 app.get('*', async (req: any, res: any) => {
+  functions.logger.info('app.getを実行');
   // ロボットであれば置換結果を返却
+
   if (req.useragent.isBot && req.query.courseId) {
-    functions.logger.info(req.query.courseId);
+    functions.logger.info('(isBotとcourseId)を通過');
     // https://xxx/articles?id=bbb のようなURLを元に記事データをDBから取得
     const course = (
       await db.doc(`courses/${req.query.courseId}`).get()
     )?.data();
-    functions.logger.info(course);
+
     if (course) {
+      functions.logger.info(course);
       // 結果を返却
       res.send(buildHtml(course));
+
       return;
     }
   }
