@@ -10,18 +10,22 @@ const db = admin.firestore();
 const file = readFileSync(resolve(__dirname, 'index.html'), {
   encoding: 'utf-8',
 });
+functions.logger.info('replacerの前');
+functions.logger.info(file);
 
 // 置換ヘルパー
 const replacer = (data: string) => {
-  functions.logger.info('test1'); // ここはlogger走る
   return (match: string, content: string): string => {
     return match.replace(content, data);
   };
 };
 
+functions.logger.info('replacer定義のあと');
+functions.logger.info(replacer);
+
 // 置換関数
 const buildHtml = (course: { [key: string]: string }) => {
-  functions.logger.info('test2'); // ここはlogger走ってない
+  functions.logger.info('buildHtmlを実行');
   return (
     file
       // descriptionを記事本文の先頭200文字に置換
@@ -46,7 +50,7 @@ const buildHtml = (course: { [key: string]: string }) => {
       // OG:URLを記事URLに置換
       .replace(
         /<meta property="og:url" content="(.+)" \/>/gm,
-        replacer('https://course-maker-fb177.web.app/' + course.id)
+        replacer('https://course-maker-fb177.web.app/' + course.courseId)
       )
   );
 };
@@ -61,12 +65,13 @@ app.get('*', async (req: any, res: any) => {
   functions.logger.info('app.getを実行');
   // ロボットであれば置換結果を返却
 
-  if (req.useragent.isBot && req.query.courseId) {
+  if (req.useragent.isBot) {
     functions.logger.info('(isBotとcourseId)を通過');
     // https://xxx/articles?id=bbb のようなURLを元に記事データをDBから取得
     const course = (
       await db.doc(`courses/${req.query.courseId}`).get()
     )?.data();
+    functions.logger.info(req.query.courseId);
 
     if (course) {
       functions.logger.info(course);
