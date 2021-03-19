@@ -10,8 +10,6 @@ const db = admin.firestore();
 const file = readFileSync(resolve(__dirname, 'index.html'), {
   encoding: 'utf-8',
 });
-functions.logger.info('replacerの前');
-functions.logger.info(file);
 
 // 置換ヘルパー
 const replacer = (data: string) => {
@@ -20,12 +18,8 @@ const replacer = (data: string) => {
   };
 };
 
-functions.logger.info('replacer定義のあと');
-functions.logger.info(replacer);
-
 // 置換関数
 const buildHtml = (course: { [key: string]: string }) => {
-  functions.logger.info('buildHtmlを実行');
   return (
     file
       // descriptionを記事本文の先頭200文字に置換
@@ -62,19 +56,15 @@ const app = express();
 app.use(useragent.express());
 
 app.get('*', async (req: any, res: any) => {
-  functions.logger.info('app.getを実行');
   // ロボットであれば置換結果を返却
 
   if (req.useragent.isBot) {
-    functions.logger.info('(isBotとcourseId)を通過');
     // https://xxx/articles?id=bbb のようなURLを元に記事データをDBから取得
     const course = (
       await db.doc(`courses/${req.query.courseId}`).get()
     )?.data();
-    functions.logger.info(req.query.courseId);
 
     if (course) {
-      functions.logger.info(course);
       // 結果を返却
       res.send(buildHtml(course));
 
@@ -86,4 +76,4 @@ app.get('*', async (req: any, res: any) => {
   res.send(file);
 });
 
-export const render = functions.region('asia-northeast1').https.onRequest(app);
+export const render = functions.https.onRequest(app);
