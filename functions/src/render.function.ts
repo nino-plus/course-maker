@@ -3,7 +3,6 @@ import * as express from 'express';
 import * as useragent from 'express-useragent';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
-// import { db } from './utils/db';
 import * as admin from 'firebase-admin';
 const db = admin.firestore();
 
@@ -45,7 +44,7 @@ const buildHtml = (course: { [key: string]: string }) => {
       // OG:URLを記事URLに置換
       .replace(
         /<meta property="og:url" content="(.+)" \/>/gm,
-        replacer('https://course-maker-fb177.web.app/' + course.id)
+        replacer('https://course-maker-fb177.web.app/' + course.courseId)
       )
   );
 };
@@ -58,14 +57,17 @@ app.use(useragent.express());
 
 app.get('*', async (req: any, res: any) => {
   // ロボットであれば置換結果を返却
-  if (req.useragent.isBot && req.query.courseId) {
+
+  if (req.useragent.isBot) {
     // https://xxx/articles?id=bbb のようなURLを元に記事データをDBから取得
     const course = (
       await db.doc(`courses/${req.query.courseId}`).get()
     )?.data();
+
     if (course) {
       // 結果を返却
       res.send(buildHtml(course));
+
       return;
     }
   }
@@ -74,4 +76,4 @@ app.get('*', async (req: any, res: any) => {
   res.send(file);
 });
 
-export const render = functions.region('asia-northeast1').https.onRequest(app);
+export const render = functions.https.onRequest(app);
