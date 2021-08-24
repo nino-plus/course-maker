@@ -9,11 +9,7 @@ import { SetMetaTagsService } from 'src/app/services/set-meta-tags.service';
   styleUrls: ['./welcome.component.scss'],
 })
 export class WelcomeComponent implements OnInit {
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private setMetaTags: SetMetaTagsService
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.authService.user$.subscribe((user) => {
