@@ -18,7 +18,6 @@ export class SetMetaTagsService {
   ) {
     // 静的なページの設定
     this.titleService.setTitle('トップページ | サイト名');
-
     this.meta.addTags([
       { name: 'description', content: 'ページの概要文' },
       { property: 'og:type', content: 'コンテンツタイプ' },
@@ -28,9 +27,8 @@ export class SetMetaTagsService {
       { name: 'twitter:card', content: 'ツイッターカードのサイズ' },
       { property: 'og:image', content: 'ページのサムネイル' },
     ]);
-
     // 動的なページの場合
-    this.courseService.getCourse(course.courseId).pipe(
+    this.courseService.getCourse(this.course.courseId).pipe(
       tap((course) => {
         this.titleService.setTitle(`${course.title} | CourseMaker`);
         this.meta.addTags([
