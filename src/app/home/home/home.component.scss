@@ -4,10 +4,9 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 24px;
-  padding: 40px 0;
+  padding: 40px 24px;
 }
 .title {
-  width: 1000px;
   display: flex;
   justify-content: center;
   margin: 16px auto;
@@ -23,13 +22,7 @@ h1 {
 @media screen and (max-width: 480px) {
   /*　画面サイズが480pxからはここを読み込む　*/
   .home-wrapper {
-    display: block;
-  }
-  .title {
-    width: 360px;
-    display: flex;
-    justify-content: center;
-    margin: 16px auto;
+    padding: 0 16px;
   }
   h1 {
     font-size: 20px;

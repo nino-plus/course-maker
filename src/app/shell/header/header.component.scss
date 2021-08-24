@@ -3,7 +3,6 @@
 
 .header {
   background-color: $color-main;
-  min-width: 960px;
   padding: 16px;
   &__spacer {
     flex: 1 1 auto;
@@ -44,6 +43,14 @@
     &:hover {
       box-shadow: 0 0 0 $color-text;
       transform: translate(0, 0);
+    }
+  }
+  @media screen and (max-width: 480px) {
+    &__logo {
+      font-size: 14px;
+    }
+    &__btn {
+      font-size: 8px;
     }
   }
 }
