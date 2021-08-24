@@ -44,6 +44,9 @@
       box-shadow: 0 0 0 $color-text;
       transform: translate(0, 0);
     }
+    &--icon {
+      display: none;
+    }
   }
   @media screen and (max-width: 480px) {
     &__logo {
@@ -51,6 +54,13 @@
     }
     &__btn {
       font-size: 8px;
+      &--default {
+        display: none;
+      }
+      &--icon {
+        padding: 0;
+        display: inline-block;
+      }
     }
   }
 }
